@@ -1,31 +1,28 @@
-# collection.get(where={"$and": [{"category": "chroma"}, {"$or": [{"author": "john"}, {"author": "jack"}]}]})
-# collection.get(where=Filter.where("category" == "chroma" and ("author" == "john" or "author" == "jack")))
-# collection.get(where=where=where(and(eq("category", "chroma"), or(eq("author","john"),eq("author","jack")))))
-from typing import Union, Sequence
+from enum import Enum
+from typing import Union, Sequence, Optional, Any, Dict
 
-from chromadb import Where
-from chromadb.types import WhereOperator
+from chromadb import Where, WhereDocument
 
-
-# where=where(eq("attr", "val"));
-# where=where(lte("attr", 10));
-# where=where(gte("attr", 10));
 
 class Query:
-    def __init__(self, query: dict):
+    def __init__(self, query: Dict[str, Any]):
         self.q = query
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return self.q
 
-    def __and__(self, *other: "Query"):
-        return and_(*[self.q] + [o.q for o in other])
+    def __and__(self, *other: "Query") -> "Query":
+        return and_(self, *other)
 
-    def __or__(self, *other: "Query"):
-        return or_(*[self.q] + [o.q for o in other])
+    def __or__(self, *other: "Query") -> "Query":
+        return or_(self, *other)
 
 
 def where(query: Query) -> Where:
+    return query.to_dict()
+
+
+def where_document(query: Query) -> WhereDocument:
     return query.to_dict()
 
 
@@ -69,5 +66,24 @@ def or_(*args: Query) -> Query:
     return Query({"$or": [a.to_dict() for a in args]})
 
 
-def test_query():
-    pass
+class LogicalOperator(str, Enum):
+    AND = "$and"
+    OR = "$or"
+
+
+def contains(*val: str, op: Optional[LogicalOperator] = LogicalOperator.AND) -> Query:
+    if len(val) == 1:
+        return Query({"$contains": val[0]})
+    if op is LogicalOperator.AND:
+        return Query({"$and": [{"$contains": v} for v in val]})
+    return Query({"$or": [{"$contains": v} for v in val]})
+
+
+def not_contains(
+    *val: str, op: Optional[LogicalOperator] = LogicalOperator.AND
+) -> Query:
+    if len(val) == 1:
+        return Query({"$not_contains": val[0]})
+    if op is LogicalOperator.AND:
+        return Query({"$and": [{"$not_contains": v} for v in val]})
+    return Query({"$or": [{"$not_contains": v} for v in val]})

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chromadbx"
-version = "0.0.1"
+version = "0.0.2"
 description = "A collection of experimental Chroma extensions."
 authors = ["Trayan Azarov <trayan.azarov@amikos.tech>"]
 readme = "README.md"

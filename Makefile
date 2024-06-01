@@ -10,6 +10,7 @@ dependencies:
 install:
 	@echo "Installing the project"
 	@poetry install
+.PHONY: test
 test:
 	@echo "Running tests"
 	@poetry run pytest
