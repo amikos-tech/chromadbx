@@ -5,7 +5,7 @@ description = "A collection of experimental Chroma extensions."
 authors = ["Trayan Azarov <trayan.azarov@amikos.tech>"]
 readme = "README.md"
 
-packages = [{ include = "chroma_dp" }]
+packages = [{ include = "chromadbx" }]
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/amikos-tech/chromadbx/issues"
 "Homepage" = "https://chromadbx.chromadb.dev/"
