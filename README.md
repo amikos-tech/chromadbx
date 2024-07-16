@@ -50,3 +50,36 @@ collection.query(
     where_document=where_document(contains("this is a document", "this is another document", op=LogicalOperator.OR)))
 # {'$or': [{'$contains': 'this is a document'}, {'$contains': 'this is another document'}]}
 ```
+
+### ID Generation
+
+```python
+```
+
+#### UUIDs (default)
+
+```python
+
+
+
+```
+
+#### ULIDs
+
+```python
+import chromadb
+from chromadbx import ULIDGenerator
+import ulid
+
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+col.add(ids=ULIDGenerator(len(my_docs)), documents=my_docs)
+assert len(col.get()["ids"]) == 10
+assert all(isinstance(ulid.parse(_id), ulid.ULID) for _id in col.get()["ids"])
+```
+
+#### Hashes
+
+```python
+```

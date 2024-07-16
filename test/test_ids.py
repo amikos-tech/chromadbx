@@ -6,7 +6,14 @@ import chromadb
 import pytest
 from chromadb import Settings
 
-from chromadbx import IDGenerator
+from chromadbx import (
+    IDGenerator,
+    NanoIDGenerator,
+    ULIDGenerator,
+    RandomSHA256Generator,
+    DocumentSHA256Generator,
+    UUIDGenerator,
+)
 
 
 @pytest.fixture
@@ -21,8 +28,15 @@ def test_default_generator(client) -> None:
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=IDGenerator(len(my_docs)), documents=my_docs)
     assert len(col.get()["ids"]) == 10
-    for _id in col.get()["ids"]:
-        assert uuid.UUID(_id, version=4)
+    assert all(uuid.UUID(_id, version=4) for _id in col.get()["ids"])
+
+
+def test_uuid_generator(client) -> None:
+    col = client.get_or_create_collection("test")
+    my_docs = [f"Document {_}" for _ in range(10)]
+    col.add(ids=UUIDGenerator(len(my_docs)), documents=my_docs)
+    assert len(col.get()["ids"]) == 10
+    assert all(uuid.UUID(_id, version=4) for _id in col.get()["ids"])
 
 
 def test_custom_generator(client) -> None:
@@ -37,4 +51,44 @@ def test_custom_generator(client) -> None:
     idgen = IDGenerator(len(my_docs), generator=partial(sequential_generator, start=10))
     col.add(ids=idgen, documents=my_docs)
     assert len(col.get()["ids"]) == 10
-    assert col.get()["ids"] == [str(i) for i in range(10, 20)]
+    assert col.get()["ids"] == [
+        str(i) for i in range(10, 20)
+    ]  # this assumes sort order by ID is in effect in Chroma
+
+
+def test_nano_id_generator(client) -> None:
+    col = client.get_or_create_collection("test")
+    my_docs = [f"Document {_}" for _ in range(10)]
+    col.add(ids=NanoIDGenerator(len(my_docs)), documents=my_docs)
+    assert len(col.get()["ids"]) == 10
+    assert all(len(_id) == 21 for _id in col.get()["ids"])
+
+
+def test_ulid_id_generator(client) -> None:
+    col = client.get_or_create_collection("test")
+    my_docs = [f"Document {_}" for _ in range(10)]
+    col.add(ids=ULIDGenerator(len(my_docs)), documents=my_docs)
+    assert len(col.get()["ids"]) == 10
+    import ulid
+
+    assert all(isinstance(ulid.parse(_id), ulid.ULID) for _id in col.get()["ids"])
+
+
+def test_random_sha256_id_generator(client) -> None:
+    col = client.get_or_create_collection("test")
+    my_docs = [f"Document {_}" for _ in range(10)]
+    col.add(ids=RandomSHA256Generator(len(my_docs)), documents=my_docs)
+    assert len(col.get()["ids"]) == 10
+    assert all(len(_id) == 64 for _id in col.get()["ids"])
+
+
+def test_document_sha256_id_generator(client) -> None:
+    col = client.get_or_create_collection("test")
+    my_docs = [f"Document {_}" for _ in range(10)]
+    col.add(ids=DocumentSHA256Generator(documents=my_docs), documents=my_docs)
+    assert len(col.get()["ids"]) == 10
+    assert all(len(_id) == 64 for _id in col.get()["ids"])
+    assert all(
+        _id in col.get()["ids"]
+        for _id in list(DocumentSHA256Generator(documents=my_docs))
+    )
