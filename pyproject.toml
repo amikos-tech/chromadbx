@@ -8,14 +8,15 @@ readme = "README.md"
 packages = [{ include = "chromadbx" }]
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/amikos-tech/chromadbx/issues"
-"Homepage" = "https://chromadbx.chromadb.dev/"
+"Homepage" = "https://cookbook.chromadb.dev/"
 "Source" = "https://github.com/amikos-tech/chromadbx/"
 
 
 [tool.poetry.dependencies]
-python = ">=3.8,<=4.0"
+python = ">=3.9,<=4.0"
 pydantic = "^2.7.2"
-chromadb = "^0.5.0"
+chromadb = ">=0.4.0,<=0.6.0"
+ulid-py = "^1.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
