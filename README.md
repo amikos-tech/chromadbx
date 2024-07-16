@@ -54,14 +54,33 @@ collection.query(
 ### ID Generation
 
 ```python
+import chromadb
+from chromadbx import IDGenerator
+from functools import partial
+from typing import Generator
+
+def sequential_generator(start: int = 0) -> Generator[str, None, None]:
+        _next = start
+        while True:
+            yield f"{_next}"
+            _next += 1
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+idgen = IDGenerator(len(my_docs), generator=partial(sequential_generator, start=10))
+col.add(ids=idgen, documents=my_docs)
 ```
 
 #### UUIDs (default)
 
 ```python
+import chromadb
+from chromadbx import UUIDGenerator
 
-
-
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+col.add(ids=UUIDGenerator(len(my_docs)), documents=my_docs)
 ```
 
 #### ULIDs
@@ -70,16 +89,43 @@ collection.query(
 import chromadb
 from chromadbx import ULIDGenerator
 import ulid
-
 client = chromadb.Client()
 col = client.get_or_create_collection("test")
 my_docs = [f"Document {_}" for _ in range(10)]
 col.add(ids=ULIDGenerator(len(my_docs)), documents=my_docs)
-assert len(col.get()["ids"]) == 10
-assert all(isinstance(ulid.parse(_id), ulid.ULID) for _id in col.get()["ids"])
 ```
 
 #### Hashes
 
+**Random SHA256:**
+
 ```python
+import chromadb
+from chromadbx import RandomSHA256Generator
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+col.add(ids=RandomSHA256Generator(len(my_docs)), documents=my_docs)
+```
+
+**Document-based SHA256:**
+
+```python
+import chromadb
+from chromadbx import DocumentSHA256Generator
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+col.add(ids=DocumentSHA256Generator(documents=my_docs), documents=my_docs)
+```
+
+#### NanoID
+
+```python
+import chromadb
+from chromadbx import NanoIDGenerator
+client = chromadb.Client()
+col = client.get_or_create_collection("test")
+my_docs = [f"Document {_}" for _ in range(10)]
+col.add(ids=NanoIDGenerator(len(my_docs)), documents=my_docs)
 ```
