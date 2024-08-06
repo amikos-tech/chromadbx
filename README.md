@@ -88,7 +88,6 @@ col.add(ids=UUIDGenerator(len(my_docs)), documents=my_docs)
 ```python
 import chromadb
 from chromadbx import ULIDGenerator
-import ulid
 client = chromadb.Client()
 col = client.get_or_create_collection("test")
 my_docs = [f"Document {_}" for _ in range(10)]
