@@ -6,6 +6,11 @@
 pip install chromadbx
 ```
 
+## Features
+
+- ID generation
+- [Embeddings](docs/embeddings.md)
+
 ## Usage
 
 ### Queries
