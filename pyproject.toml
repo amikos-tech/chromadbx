@@ -26,6 +26,7 @@ pre-commit = "^3.6.0"
 hypothesis = "^6.103.0"
 ulid-py = { version = "^1.1.0" }
 nanoid = { version = "^2.0.0" }
+huggingface_hub = "^0.24.6"
 
 
 [tool.poetry.extras]
