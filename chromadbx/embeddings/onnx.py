@@ -12,19 +12,24 @@ logger = logging.getLogger(__name__)
 
 
 class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
-    def __init__(self, model_path, *, preferred_providers: Optional[List[str]] = None,
-                 max_length: Optional[int] = 256,
-                 enabled_padding:Optional[bool] = True) -> None:
+    def __init__(
+        self,
+        model_path,
+        *,
+        preferred_providers: Optional[List[str]] = None,
+        max_length: Optional[int] = 256,
+        enabled_padding: Optional[bool] = True,
+    ) -> None:
         # Import dependencies on demand to mirror other embedding functions. This
         # breaks typechecking, thus the ignores.
         # convert the list to set for unique values
         if preferred_providers and not all(
-                [isinstance(i, str) for i in preferred_providers]
+            [isinstance(i, str) for i in preferred_providers]
         ):
             raise ValueError("Preferred providers must be a list of strings")
         # check for duplicate providers
         if preferred_providers and len(preferred_providers) != len(
-                set(preferred_providers)
+            set(preferred_providers)
         ):
             raise ValueError("Preferred providers must be unique")
         self._preferred_providers = preferred_providers
@@ -53,12 +58,12 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         return cast(npt.NDArray[np.float32], v / norm[:, np.newaxis])
 
     def _forward(
-            self, documents: List[str], batch_size: int = 32
+        self, documents: List[str], batch_size: int = 32
     ) -> npt.NDArray[np.float32]:
         all_embeddings = []
         for i in range(0, len(documents), batch_size):
             input_names = [input.name for input in self.model.get_inputs()]
-            batch = documents[i: i + batch_size]
+            batch = documents[i : i + batch_size]
             encoded = [self.tokenizer.encode(d) for d in batch]
             input_ids = np.array([e.ids for e in encoded])
             attention_mask = np.array([e.attention_mask for e in encoded])
@@ -88,9 +93,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
     @cached_property
     def tokenizer(self) -> "Tokenizer":  # noqa F821
         tokenizer = self.Tokenizer.from_file(
-            os.path.join(
-                self._model_path, "tokenizer.json"
-            )
+            os.path.join(self._model_path, "tokenizer.json")
         )
         if self._max_length:
             tokenizer.enable_truncation(max_length=self._max_length)
@@ -111,15 +114,17 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
                 )
             self._preferred_providers = self.ort.get_available_providers()
         elif not set(self._preferred_providers).issubset(
-                set(self.ort.get_available_providers())
+            set(self.ort.get_available_providers())
         ):
             raise ValueError(
                 f"Preferred providers must be subset of available providers: {self.ort.get_available_providers()}"
             )
 
         so = self.ort.SessionOptions()
-        _model_paths = [os.path.join(self._model_path, "model.onnx"),
-                        os.path.join(self._model_path, "onnx", "model.onnx")]
+        _model_paths = [
+            os.path.join(self._model_path, "model.onnx"),
+            os.path.join(self._model_path, "onnx", "model.onnx"),
+        ]
         _actual_model_path = None
         # possible paths for model model_path/model.onnx or model_path/onnx/model.onnx
         for mp in _model_paths:
@@ -127,7 +132,9 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
                 _actual_model_path = mp
                 break
         if not _actual_model_path:
-            raise ValueError(f"Cannot find onnx model un the following paths: {_model_paths}")
+            raise ValueError(
+                f"Cannot find onnx model un the following paths: {_model_paths}"
+            )
 
         sess = self.ort.InferenceSession(
             _actual_model_path,

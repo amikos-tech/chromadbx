@@ -962,6 +962,44 @@ websocket-client = ">=0.32.0,<0.40.0 || >0.40.0,<0.41.dev0 || >=0.43.dev0"
 adal = ["adal (>=1.0.2)"]
 
 [[package]]
+name = "llama-embedder"
+version = "0.0.7"
+description = "LLama.cpp embedder library python bindings"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "llama_embedder-0.0.7-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:143c1dd1e493098e1bc5fd5ef173ef4b6cdb46eca2ec89e4be817aa08cc94620"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:4826cad345fa4b3947e51251aae4d5abf411c5c654ae867fb2a51edfbfbf8603"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7d2e60e6498e46f966d5049bec76d1d10f025d5e69c130d26a519cdfc5de4c1e"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0fccbe2fcdc7fe196e3874795242db31c63c0d0b3cca453932dbc35de0616b4e"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-win_amd64.whl", hash = "sha256:8333b86f0967b967b0d3f149dc5ad466e5b8b69b247f2a33cfb7c4c55af7e59f"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:e5f87c609cb2506fb1b75927cae718fa750dc1d7a9410d3a283e1ebe6a446318"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f0c95c8a9ad82b23ae726b8f237f6f5430c03b1a8b3a0cc0e67722e06fb3494a"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c309bcfd32d2540dc48c045b84eb6ecaf5e1ba32d978939bbc46a2051bf13c3b"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2f00dc03de57415f65dbdb48755c47005d86020fa143dbf11eb75953356786e3"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-win_amd64.whl", hash = "sha256:505b5dcd7999e039907ccee9f8f705ec9287404a79e175f6f0894df73d794894"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:60b74dffe4bb5786cefdb75ccdc0a3534f9b2d097213ba34d766c03ac519b206"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:813602f2d3a50d57b7a803a35889f09754abed3508a867d9551c280af228c9cd"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:67ad0077b1e7d1fd3d71ee611ec0a7b517eb8e4055c5254d733ec8e2a0ff77ce"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6f0f2597c72077af3885c01931187942cac19f9b44004e6f9ebfe2bb895c8671"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-win_amd64.whl", hash = "sha256:705a933316979f19d670897c3655937507a0e117989e83bdd72abf3020ebdf94"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:2d62a4b11bd70b3919bb076bbabb75ae50545365736f896893d87d9ce7cbad7e"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:b5b3c3c1f518f365fca6284a710ec9bee8c312edafc0534e450f55cf9dd35be3"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7f279ed5548c3d19e0fa08ab2fc075d973c64f8b7932a581aab74231ebac2094"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9d8e75e816d06ef82962598dfbad5e7ce64819b15a6bdaf0abd1cc77fb0b0972"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-win_amd64.whl", hash = "sha256:885008f74a0d53e519624193a73b38176951a6ca9229dd9ab3d36f19e5b01180"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:dd493e4509487cfa60252077169b09398ef74ed73cf236204eed73f8e9bf3a19"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:7f4b4b4e6c9750d775063f19df0d1889a0b766d818854c06963b378236143307"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2c0de5b95be1c69ece6ad23e3896a28a43cb791d2aecdcf22f9f2eb247e5c864"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2fca336108dc4b0d8a47b56a6c01c19dd91cbd042c14a20e6f297827e53feda3"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-win_amd64.whl", hash = "sha256:f73f8ea1eecdd1ccd7f48bb23a61625c824921d3cfcea6998e43f80935d74680"},
+    {file = "llama_embedder-0.0.7.tar.gz", hash = "sha256:578b638457555abceb6e98e638cc5361306add64a5d93ea751f8f23f0dc80e40"},
+]
+
+[package.extras]
+test = ["pytest (>=6.0)"]
+
+[[package]]
 name = "markdown-it-py"
 version = "3.0.0"
 description = "Python port of markdown-it. Markdown parsing, done right!"
@@ -2700,4 +2738,4 @@ ids = ["nanoid", "ulid-py"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<=4.0"
-content-hash = "87b45bca0e8fa6fb70b4c1f5e22438d965c88a624fca3be8257cbef201bcc84b"
+content-hash = "8f146ce1bad8f738f1bb30746ea79e1cc31de6cc914015d6bfb790ee72c0bae0"

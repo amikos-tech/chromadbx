@@ -18,6 +18,7 @@ pydantic = "^2.7.2"
 chromadb = ">=0.4.0,<=0.6.0"
 ulid-py = { version = "^1.1.0", optional = true }
 nanoid = { version = "^2.0.0", optional = true }
+llama-embedder = "^0.0.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
