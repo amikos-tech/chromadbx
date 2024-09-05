@@ -10,6 +10,9 @@ pip install chromadbx
 
 - ID generation
 - [Embeddings](docs/embeddings.md)
+    - OnnxRuntime embeddings
+    - Llama.cpp embeddings
+
 
 ## Usage
 
