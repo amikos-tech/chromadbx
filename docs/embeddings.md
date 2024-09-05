@@ -8,7 +8,7 @@ Download a model:
 
 ```bash
 mkdir -p ~/.cache/models/hf
-git clone git clone https://huggingface.co/snowflake/arctic-embed-s ~/.cache/models/hf/snowflake-arctic-embed-s
+git clone https://huggingface.co/snowflake/arctic-embed-s ~/.cache/models/hf/snowflake-arctic-embed-s
 ```
 
 Alternatively use HF CLI:
