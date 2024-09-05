@@ -1,33 +1,35 @@
+name: Test
+
 on:
   workflow_dispatch: { }
-
+  pull_request: { }
 jobs:
   test:
     runs-on: [ "ubuntu-latest" ]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 3.9
+      - name: Set up Python 3.10
         uses: actions/setup-python@v2
         with:
-          python-version: "3.9"
-      - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.4.0
-      - name: start minikube
-        id: minikube
-        uses: medyagh/setup-minikube@latest
-        with:
-          kubernetes-version: 1.27.3
-      - name: Add helm repo
-        run: |
-          set -e
-          helm repo add chromadb https://amikos-tech.github.io/chromadb-chart/
-          helm repo update
-      - name: Install chromadb
-        run: |
-          set -e
-          helm install chromadb chromadb/chromadb --set chromadb.allowReset=true,chromadb.apiVersion=${{ matrix.chroma-version }},chromadb.auth.enabled=false
+          python-version: "3.10"
+#      - name: Install Helm
+#        uses: azure/setup-helm@v1
+#        with:
+#          version: v3.4.0
+#      - name: start minikube
+#        id: minikube
+#        uses: medyagh/setup-minikube@latest
+#        with:
+#          kubernetes-version: 1.27.3
+#      - name: Add helm repo
+#        run: |
+#          set -e
+#          helm repo add chromadb https://amikos-tech.github.io/chromadb-chart/
+#          helm repo update
+#      - name: Install chromadb
+#        run: |
+#          set -e
+#          helm install chromadb chromadb/chromadb --set chromadb.allowReset=true,chromadb.apiVersion=${{ matrix.chroma-version }},chromadb.auth.enabled=false
       - name: Install dependencies
         run: |
           set -e
@@ -42,3 +44,4 @@ jobs:
         run: |
           set -e
           poetry update
+          poetry run pytest
