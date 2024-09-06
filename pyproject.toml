@@ -18,7 +18,7 @@ pydantic = "^2.7.2"
 chromadb = ">=0.4.0,<=0.6.0"
 ulid-py = { version = "^1.1.0", optional = true }
 nanoid = { version = "^2.0.0", optional = true }
-llama-embedder = "^0.0.7"
+llama-embedder = { version = "^0.0.7", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
@@ -28,10 +28,12 @@ hypothesis = "^6.103.0"
 ulid-py = { version = "^1.1.0" }
 nanoid = { version = "^2.0.0" }
 huggingface_hub = "^0.24.6"
+llama-embedder = "^0.0.7"
 
 
 [tool.poetry.extras]
 ids = ["ulid-py", "nanoid"]
+embeddings = ["llama-embedder","onnxruntime"]
 
 [build-system]
 requires = ["poetry-core"]
