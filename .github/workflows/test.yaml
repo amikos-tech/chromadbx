@@ -43,6 +43,6 @@ jobs:
       - name: Run tests
         run: |
           set -e
-          poetry install --all-extras --no-update
+          poetry install --all-extras
           poetry update --with dev
           poetry run pytest
