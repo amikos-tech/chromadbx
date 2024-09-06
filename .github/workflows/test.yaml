@@ -43,5 +43,5 @@ jobs:
       - name: Run tests
         run: |
           set -e
-          poetry update
+          poetry update --all-extras
           poetry run pytest
