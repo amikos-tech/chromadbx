@@ -10,7 +10,8 @@ class LlamaCppEmbeddingFunction(EmbeddingFunction[Documents]):
             from llama_embedder import LlamaEmbedder, PoolingType
         except ImportError:
             raise ValueError(
-                "The cohere python package is not installed. Please install it with `pip install llama-embedder`"
+                "The `llama-embedder` python package is not installed. "
+                "Please install it with `pip install llama-embedder`"
             )
 
         if not os.path.exists(model_path):
