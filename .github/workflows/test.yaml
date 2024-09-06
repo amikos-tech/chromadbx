@@ -43,5 +43,6 @@ jobs:
       - name: Run tests
         run: |
           set -e
-          poetry update --with dev --extras "ids embeddings"
+          poetry update --with dev
+          poetry install --all-extras
           poetry run pytest
