@@ -7,6 +7,37 @@ on:
       - chromadbx/**
       - test/**
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          set -e
+          python -m pip install --upgrade pip
+          curl -sSL https://install.python-poetry.org | python3 -
+      - name: Run tests
+        run: |
+          set -e
+          poetry update --with dev
+      - name: Run pre-commit
+        shell: bash
+        run: |
+          pre-commit run --all-files trailing-whitespace
+          pre-commit run --all-files mixed-line-ending
+          pre-commit run --all-files end-of-file-fixer
+          pre-commit run --all-files requirements-txt-fixer
+          pre-commit run --all-files check-xml
+          pre-commit run --all-files check-merge-conflict
+          pre-commit run --all-files check-case-conflict
+          pre-commit run --all-files check-docstring-first
+          pre-commit run --all-files black
+          pre-commit run --all-files flake8
+          pre-commit run --all-files check-yaml
   test:
     runs-on: [ "ubuntu-latest" ]
     steps:
