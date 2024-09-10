@@ -22,3 +22,14 @@ def test_embed(get_model: str) -> None:
     assert len(embeddings[0]) == 384
     assert len(embeddings[1]) == 384
     assert embeddings[0] != embeddings[1]
+
+
+def test_embed_from_hf_model() -> None:
+    ef = LlamaCppEmbeddingFunction(
+        model_path=DEFAULT_REPO, hf_file_name=DEFAULT_TEST_MODEL
+    )
+    embeddings = ef(["hello world", "goodbye world"])
+    assert len(embeddings) == 2
+    assert len(embeddings[0]) == 384
+    assert len(embeddings[1]) == 384
+    assert embeddings[0] != embeddings[1]
