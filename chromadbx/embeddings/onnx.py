@@ -33,7 +33,8 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         ):
             raise ValueError("Preferred providers must be unique")
         self._preferred_providers = preferred_providers
-        self._model_path = model_path
+        self._model_path = os.path.expanduser(model_path)
+        print(self._model_path)
         self._max_length = max_length
         self._enabled_padding = enabled_padding
         try:
