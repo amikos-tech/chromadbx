@@ -4,7 +4,6 @@ import uuid
 from functools import partial
 from typing import Generator, Callable, Optional
 
-import nanoid.resources
 from chromadb import IDs, Documents
 
 
@@ -180,6 +179,7 @@ def nano_id_generator(
 ) -> Generator[str, None, None]:
     try:
         from nanoid import generate
+        import nanoid.resources
     except ImportError:
         raise ValueError(
             "The nanoid python package is not installed. Please install it with `pip install nanoid`"
