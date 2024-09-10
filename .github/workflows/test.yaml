@@ -20,24 +20,24 @@ jobs:
           set -e
           python -m pip install --upgrade pip
           curl -sSL https://install.python-poetry.org | python3 -
-      - name: Run tests
+      - name: Install dependencies
         run: |
           set -e
           poetry update --with dev
       - name: Run pre-commit
         shell: bash
         run: |
-          pre-commit run --all-files trailing-whitespace
-          pre-commit run --all-files mixed-line-ending
-          pre-commit run --all-files end-of-file-fixer
-          pre-commit run --all-files requirements-txt-fixer
-          pre-commit run --all-files check-xml
-          pre-commit run --all-files check-merge-conflict
-          pre-commit run --all-files check-case-conflict
-          pre-commit run --all-files check-docstring-first
-          pre-commit run --all-files black
-          pre-commit run --all-files flake8
-          pre-commit run --all-files check-yaml
+          poetry run pre-commit run --all-files trailing-whitespace
+          poetry run pre-commit run --all-files mixed-line-ending
+          poetry run pre-commit run --all-files end-of-file-fixer
+          poetry run pre-commit run --all-files requirements-txt-fixer
+          poetry run pre-commit run --all-files check-xml
+          poetry run pre-commit run --all-files check-merge-conflict
+          poetry run pre-commit run --all-files check-case-conflict
+          poetry run pre-commit run --all-files check-docstring-first
+          poetry run pre-commit run --all-files black
+          poetry run pre-commit run --all-files flake8
+          poetry run pre-commit run --all-files check-yaml
   test:
     runs-on: [ "ubuntu-latest" ]
     steps:
