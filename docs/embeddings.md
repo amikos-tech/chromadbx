@@ -40,6 +40,27 @@ issue.
 
 A convenient way to run llama.cpp models to generate embeddings.
 
+### With HF Model
+
+The embedding function supports downloading models directly from HuggingFace Hub.
+
+```py
+import chromadb
+from chromadbx.embeddings.llamacpp import LlamaCppEmbeddingFunction
+
+ef = LlamaCppEmbeddingFunction(model_path="yixuan-chia/snowflake-arctic-embed-s-GGUF",
+                               hf_file_name="snowflake-arctic-embed-s-F32.gguf")
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+
+```
+
+### With Local Model
+
 Download a model:
 
 ```bash
@@ -48,8 +69,8 @@ huggingface-cli download ChristianAzinn/snowflake-arctic-embed-s-gguf --include=
 ```
 
 ```python
-from chromadbx.embeddings.llamacpp import LlamaCppEmbeddingFunction
 import chromadb
+from chromadbx.embeddings.llamacpp import LlamaCppEmbeddingFunction
 
 ef = LlamaCppEmbeddingFunction(model_path="snowflake-arctic-embed-s/snowflake-arctic-embed-s-f16.GGUF")
 
