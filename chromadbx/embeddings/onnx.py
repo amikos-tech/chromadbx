@@ -19,10 +19,18 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         preferred_providers: Optional[List[str]] = None,
         max_length: Optional[int] = 256,
         enabled_padding: Optional[bool] = True,
+        hf_download: Optional[bool] = False,
+        model_cache_dir: Optional[str] = None,
     ) -> None:
-        # Import dependencies on demand to mirror other embedding functions. This
-        # breaks typechecking, thus the ignores.
-        # convert the list to set for unique values
+        """
+        Initialize the OnnxRuntimeEmbeddings.
+
+        :param model_path: This can be a local path to the model or the HuggingFace repository. You need to install huggingface_hub package.
+        :param preferred_providers: The preferred providers to use. If not provided, all available providers will be used.
+        :param max_length: The maximum length of the input sequence. Default is 256.
+        :param enabled_padding: Whether to enable padding. Default is True.
+        :param hf_download: Whether to download the model from HuggingFace repository. Default is False.
+        """
         if preferred_providers and not all(
             [isinstance(i, str) for i in preferred_providers]
         ):
@@ -33,8 +41,17 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         ):
             raise ValueError("Preferred providers must be unique")
         self._preferred_providers = preferred_providers
-        self._model_path = os.path.expanduser(model_path)
-        print(self._model_path)
+        self._local_model_path = os.path.expanduser(model_path)
+        if hf_download:
+            try:
+                from huggingface_hub import snapshot_download
+            except ImportError:
+                raise ValueError(
+                    "The `huggingface_hub` python package is not installed. "
+                    "Please install it with `pip install huggingface_hub`"
+                )
+            self._local_model_path = snapshot_download(repo_id=model_path)
+        self._actual_model_path = self._find_onnx_model(self._local_model_path)
         self._max_length = max_length
         self._enabled_padding = enabled_padding
         try:
@@ -50,6 +67,26 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
             raise ValueError(
                 "The tokenizers python package is not installed. Please install it with `pip install tokenizers`"
             )
+
+    @staticmethod
+    def _find_onnx_model(model_path: str) -> str:
+        _model_paths = [
+            os.path.join(model_path, "model.onnx"),
+            os.path.join(model_path, "onnx", "model.onnx"),
+        ]
+        if not os.path.exists(model_path):
+            raise ValueError(f"Model path {model_path} does not exist")
+        _actual_model_path = None
+        # possible paths for model model_path/model.onnx or model_path/onnx/model.onnx
+        for mp in _model_paths:
+            if os.path.exists(mp):
+                _actual_model_path = mp
+                break
+        if not _actual_model_path:
+            raise ValueError(
+                f"Cannot find onnx model un the following paths: {_model_paths}"
+            )
+        return _actual_model_path
 
     # Use pytorches default epsilon for division by zero
     # https://pytorch.org/docs/stable/generated/torch.nn.functional.normalize.html
@@ -93,8 +130,9 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
 
     @cached_property
     def tokenizer(self) -> "Tokenizer":  # noqa F821
+        # TODO is this brittle? Can tokenizer.json be in different place?
         tokenizer = self.Tokenizer.from_file(
-            os.path.join(self._model_path, "tokenizer.json")
+            os.path.join(self._local_model_path, "tokenizer.json")
         )
         if self._max_length:
             tokenizer.enable_truncation(max_length=self._max_length)
@@ -106,7 +144,6 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
 
     @cached_property
     def model(self) -> "InferenceSession":  # noqa F821
-        print(self.ort.get_available_providers())
         if self._preferred_providers is None or len(self._preferred_providers) == 0:
             if len(self.ort.get_available_providers()) > 0:
                 logger.debug(
@@ -122,23 +159,8 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
             )
 
         so = self.ort.SessionOptions()
-        _model_paths = [
-            os.path.join(self._model_path, "model.onnx"),
-            os.path.join(self._model_path, "onnx", "model.onnx"),
-        ]
-        _actual_model_path = None
-        # possible paths for model model_path/model.onnx or model_path/onnx/model.onnx
-        for mp in _model_paths:
-            if os.path.exists(mp):
-                _actual_model_path = mp
-                break
-        if not _actual_model_path:
-            raise ValueError(
-                f"Cannot find onnx model un the following paths: {_model_paths}"
-            )
-
         sess = self.ort.InferenceSession(
-            _actual_model_path,
+            self._actual_model_path,
             # Since 1.9 onnyx runtime requires providers to be specified when there are multiple available - https://onnxruntime.ai/docs/api/python/api_summary.html
             # This is probably not ideal but will improve DX as no exceptions will be raised in multi-provider envs
             providers=self._preferred_providers,

@@ -26,10 +26,20 @@ def get_model() -> str:
     return os.path.join("local_model", "all-MiniLM-L6-v2")
 
 
-def test_download(get_model):
-    print(get_model)
+def test_download(get_model) -> None:
     ef = OnnxRuntimeEmbeddings(
         model_path=get_model, preferred_providers=["CPUExecutionProvider"]
+    )
+    embeddings = ef(["hello world", "goodbye world"])
+    assert len(embeddings) == 2
+    assert len(embeddings[0]) == 384
+
+
+def test_download_from_hf() -> None:
+    ef = OnnxRuntimeEmbeddings(
+        model_path=DEFAULT_REPO,
+        preferred_providers=["CPUExecutionProvider"],
+        hf_download=True,
     )
     embeddings = ef(["hello world", "goodbye world"])
     assert len(embeddings) == 2
