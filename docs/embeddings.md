@@ -4,6 +4,21 @@
 
 A convenient way to run onnx models to generate embeddings.
 
+### With HuggingFace Model
+
+The following example shows how to use the embedding function to download a model from HuggingFace and use it to generate embeddings.
+
+> Note: You will need to install `huggingface_hub` (`pip install huggingface_hub`) to download the model.
+
+```python
+from chromadbx.embeddings.onnx import OnnxRuntimeEmbeddings
+ef=OnnxRuntimeEmbeddings(model_path="snowflake/arctic-embed-s",preferred_providers=["CPUExecutionProvider"],hf_download=True)
+
+ef(["text"])
+```
+
+### With Local Model
+
 Download a model:
 
 ```bash
