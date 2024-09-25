@@ -95,3 +95,35 @@ col = client.get_or_create_collection("test", embedding_function=ef)
 
 col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
 ```
+
+## Google Vertex AI
+
+A convenient way to run Google Vertex AI models to generate embeddings.
+
+Google Vertex AI uses variety of authentication methods. The most secure is either service account key file or Google Application Default Credentials.
+
+```py
+import chromadb
+from chromadbx.embeddings.google import GoogleVertexAiEmbeddings
+
+ef = GoogleVertexAiEmbeddings()
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+```
+
+### Auth with service account key file
+
+```py
+import chromadb
+from chromadbx.embeddings.google import GoogleVertexAiEmbeddings
+from google.oauth2 import service_account
+
+credentials = service_account.Credentials.from_service_account_file("path/to/service-account-key.json")
+ef = GoogleVertexAiEmbeddings(credentials=credentials)
+
+ef(["hello world", "goodbye world"])
+```
