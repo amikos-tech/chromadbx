@@ -1,5 +1,6 @@
 # original work on this was done by @mileszim - https://github.com/mileszim/chroma/tree/cloudflare-workers-ai-embedding
 import logging
+import os
 from typing import Optional, Dict, cast
 
 import httpx
@@ -9,17 +10,18 @@ from chromadb import Documents, EmbeddingFunction, Embeddings
 logger = logging.getLogger(__name__)
 
 
-class CloudflareWorkersAIEmbeddingFunction(EmbeddingFunction[Documents]):
+class CloudflareWorkersAIEmbeddings(EmbeddingFunction[Documents]):
     # Follow API Quickstart for Cloudflare Workers AI
     # https://developers.cloudflare.com/workers-ai/
     # Information about the text embedding modules in Google Vertex AI
     # https://developers.cloudflare.com/workers-ai/models/embedding/
     def __init__(
         self,
-        api_token: str,
-        account_id: Optional[str] = None,
         model_name: Optional[str] = "@cf/baai/bge-base-en-v1.5",
-        gateway_url: Optional[
+        *,
+        api_token: Optional[str] = os.getenv("CF_API_TOKEN"),
+        account_id: Optional[str] = None,
+        gateway_endpoint: Optional[
             str
         ] = None,  # use Cloudflare AI Gateway instead of the usual endpoint
         # right now endpoint schema supports up to 100 docs at a time
@@ -27,17 +29,29 @@ class CloudflareWorkersAIEmbeddingFunction(EmbeddingFunction[Documents]):
         max_batch_size: Optional[int] = 100,
         headers: Optional[Dict[str, str]] = None,
     ):
-        if not gateway_url and not account_id:
-            raise ValueError("Please provide either an account_id or a gateway_url.")
-        if gateway_url and account_id:
+        """
+        Initialize the Cloudflare Workers AI Embeddings function.
+
+        :param model_name: The name of the model to use. Defaults to "@cf/baai/bge-base-en-v1.5".
+        :param api_token: The API token to use. Defaults to the CF_API_TOKEN environment variable.
+        :param account_id: The account ID to use.
+        :param gateway_endpoint: The gateway URL to use.
+        :param max_batch_size: The maximum batch size to use. Defaults to 100.
+        :param headers: The headers to use. Defaults to None.
+        """
+        if not gateway_endpoint and not account_id:
             raise ValueError(
-                "Please provide either an account_id or a gateway_url, not both."
+                "Please provide either an account_id or a gateway_endpoint."
             )
-        if gateway_url is not None and not gateway_url.endswith("/"):
-            gateway_url += "/"
+        if gateway_endpoint and account_id:
+            raise ValueError(
+                "Please provide either an account_id or a gateway_endpoint, not both."
+            )
+        if gateway_endpoint is not None and not gateway_endpoint.endswith("/"):
+            gateway_endpoint += "/"
         self._api_url = (
-            f"{gateway_url}{model_name}"
-            if gateway_url is not None
+            f"{gateway_endpoint}{model_name}"
+            if gateway_endpoint is not None
             else f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model_name}"
         )
         self._session = httpx.Client()

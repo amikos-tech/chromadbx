@@ -3,7 +3,7 @@ import os
 import pytest
 
 from chromadbx.embeddings.cloudflare import (
-    CloudflareWorkersAIEmbeddingFunction,
+    CloudflareWorkersAIEmbeddings,
 )
 
 
@@ -12,7 +12,7 @@ from chromadbx.embeddings.cloudflare import (
     reason="CF_API_TOKEN and CF_ACCOUNT_ID not set, skipping test.",
 )
 def test_cf_ef_token_and_account() -> None:
-    ef = CloudflareWorkersAIEmbeddingFunction(
+    ef = CloudflareWorkersAIEmbeddings(
         api_token=os.environ.get("CF_API_TOKEN", ""),
         account_id=os.environ.get("CF_ACCOUNT_ID"),
     )
@@ -27,9 +27,9 @@ def test_cf_ef_token_and_account() -> None:
     reason="CF_API_TOKEN and CF_ACCOUNT_ID not set, skipping test.",
 )
 def test_cf_ef_gateway() -> None:
-    ef = CloudflareWorkersAIEmbeddingFunction(
+    ef = CloudflareWorkersAIEmbeddings(
         api_token=os.environ.get("CF_API_TOKEN", ""),
-        gateway_url=os.environ.get("CF_GATEWAY_ENDPOINT"),
+        gateway_endpoint=os.environ.get("CF_GATEWAY_ENDPOINT"),
     )
     embeddings = ef(["test doc"])
     assert embeddings is not None
@@ -42,7 +42,7 @@ def test_cf_ef_gateway() -> None:
     reason="CF_API_TOKEN and CF_ACCOUNT_ID not set, skipping test.",
 )
 def test_cf_ef_large_batch() -> None:
-    ef = CloudflareWorkersAIEmbeddingFunction(api_token="dummy", account_id="dummy")
+    ef = CloudflareWorkersAIEmbeddings(api_token="dummy", account_id="dummy")
     with pytest.raises(ValueError, match="Batch too large"):
         ef(["test doc"] * 101)
 
@@ -53,9 +53,9 @@ def test_cf_ef_large_batch() -> None:
 )
 def test_cf_ef_missing_account_or_gateway() -> None:
     with pytest.raises(
-        ValueError, match="Please provide either an account_id or a gateway_url"
+        ValueError, match="Please provide either an account_id or a gateway_endpoint"
     ):
-        CloudflareWorkersAIEmbeddingFunction(api_token="dummy")
+        CloudflareWorkersAIEmbeddings(api_token="dummy")
 
 
 @pytest.mark.skipif(
@@ -65,8 +65,8 @@ def test_cf_ef_missing_account_or_gateway() -> None:
 def test_cf_ef_with_account_or_gateway() -> None:
     with pytest.raises(
         ValueError,
-        match="Please provide either an account_id or a gateway_url, not both",
+        match="Please provide either an account_id or a gateway_endpoint, not both",
     ):
-        CloudflareWorkersAIEmbeddingFunction(
-            api_token="dummy", account_id="dummy", gateway_url="dummy"
+        CloudflareWorkersAIEmbeddings(
+            api_token="dummy", account_id="dummy", gateway_endpoint="dummy"
         )
