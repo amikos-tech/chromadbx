@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -307,6 +307,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Onnx Runtime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-huggingface-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      With HuggingFace Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-local-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      With Local Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -329,7 +353,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-local-model" class="md-nav__link">
+  <a href="#with-local-model_1" class="md-nav__link">
     <span class="md-ellipsis">
       With Local Model
     </span>
@@ -339,6 +363,48 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-vertex-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Google Vertex AI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Google Vertex AI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auth-with-service-account-key-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auth with service account key file
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mistral-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mistral AI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudflare-workers-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloudflare Workers AI
+    </span>
+  </a>
   
 </li>
       
@@ -385,6 +451,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Onnx Runtime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-huggingface-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      With HuggingFace Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-local-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      With Local Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -407,7 +497,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-local-model" class="md-nav__link">
+  <a href="#with-local-model_1" class="md-nav__link">
     <span class="md-ellipsis">
       With Local Model
     </span>
@@ -417,6 +507,48 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-vertex-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Google Vertex AI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Google Vertex AI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auth-with-service-account-key-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auth with service account key file
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mistral-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mistral AI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudflare-workers-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloudflare Workers AI
+    </span>
+  </a>
   
 </li>
       
@@ -441,26 +573,37 @@
 <h1 id="embeddings">Embeddings<a class="headerlink" href="#embeddings" title="Permanent link">&para;</a></h1>
 <h2 id="onnx-runtime">Onnx Runtime<a class="headerlink" href="#onnx-runtime" title="Permanent link">&para;</a></h2>
 <p>A convenient way to run onnx models to generate embeddings.</p>
+<h3 id="with-huggingface-model">With HuggingFace Model<a class="headerlink" href="#with-huggingface-model" title="Permanent link">&para;</a></h3>
+<p>The following example shows how to use the embedding function to download a model from HuggingFace and use it to generate embeddings.</p>
+<blockquote>
+<p>Note: You will need to install <code>huggingface_hub</code> (<code>pip install huggingface_hub</code>) to download the model.</p>
+</blockquote>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.onnx</span> <span class="kn">import</span> <span class="n">OnnxRuntimeEmbeddings</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ef</span><span class="o">=</span><span class="n">OnnxRuntimeEmbeddings</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;snowflake/arctic-embed-s&quot;</span><span class="p">,</span><span class="n">preferred_providers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CPUExecutionProvider&quot;</span><span class="p">],</span><span class="n">hf_download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">ef</span><span class="p">([</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<h3 id="with-local-model">With Local Model<a class="headerlink" href="#with-local-model" title="Permanent link">&para;</a></h3>
 <p>Download a model:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cache/models/hf
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://huggingface.co/snowflake/arctic-embed-s<span class="w"> </span>~/.cache/models/hf/snowflake-arctic-embed-s
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cache/models/hf
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://huggingface.co/snowflake/arctic-embed-s<span class="w"> </span>~/.cache/models/hf/snowflake-arctic-embed-s
 </span></code></pre></div>
 <p>Alternatively use HF CLI:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;huggingface_hub[cli]&quot;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>huggingface-cli<span class="w"> </span>download<span class="w"> </span>snowflake/arctic-embed-s<span class="w"> </span>--local-dir<span class="w"> </span>snowflake-arctic-embed-s
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;huggingface_hub[cli]&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>huggingface-cli<span class="w"> </span>download<span class="w"> </span>snowflake/arctic-embed-s<span class="w"> </span>--local-dir<span class="w"> </span>snowflake-arctic-embed-s
 </span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.onnx</span> <span class="kn">import</span> <span class="n">OnnxRuntimeEmbeddings</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span> <span class="nn">chromadb</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># adjust the model path to the path where you downloaded the model</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># We use the CPUExecutionProvider, adjust it to your liking or leave empty to let onnx choose the most appropriate provider</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">OnnxRuntimeEmbeddings</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;snowflake-arctic-embed-s&quot;</span><span class="p">,</span> <span class="n">preferred_providers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CPUExecutionProvider&quot;</span><span class="p">])</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.onnx</span> <span class="kn">import</span> <span class="n">OnnxRuntimeEmbeddings</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># adjust the model path to the path where you downloaded the model</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># We use the CPUExecutionProvider, adjust it to your liking or leave empty to let onnx choose the most appropriate provider</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">OnnxRuntimeEmbeddings</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;snowflake-arctic-embed-s&quot;</span><span class="p">,</span> <span class="n">preferred_providers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CPUExecutionProvider&quot;</span><span class="p">])</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
 </span></code></pre></div>
 <h2 id="llamacpp">Llama.cpp<a class="headerlink" href="#llamacpp" title="Permanent link">&para;</a></h2>
 <p>⚠️ Llama.cpp embedding function is still in early development. Please report any problems you may have by raising an
@@ -468,33 +611,102 @@ issue.</p>
 <p>A convenient way to run llama.cpp models to generate embeddings.</p>
 <h3 id="with-hf-model">With HF Model<a class="headerlink" href="#with-hf-model" title="Permanent link">&para;</a></h3>
 <p>The embedding function supports downloading models directly from HuggingFace Hub.</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.llamacpp</span> <span class="kn">import</span> <span class="n">LlamaCppEmbeddingFunction</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">LlamaCppEmbeddingFunction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;yixuan-chia/snowflake-arctic-embed-s-GGUF&quot;</span><span class="p">,</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                               <span class="n">hf_file_name</span><span class="o">=</span><span class="s2">&quot;snowflake-arctic-embed-s-F32.gguf&quot;</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.llamacpp</span> <span class="kn">import</span> <span class="n">LlamaCppEmbeddingFunction</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">LlamaCppEmbeddingFunction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;yixuan-chia/snowflake-arctic-embed-s-GGUF&quot;</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                               <span class="n">hf_file_name</span><span class="o">=</span><span class="s2">&quot;snowflake-arctic-embed-s-F32.gguf&quot;</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
 </span></code></pre></div>
-<h3 id="with-local-model">With Local Model<a class="headerlink" href="#with-local-model" title="Permanent link">&para;</a></h3>
+<h3 id="with-local-model_1">With Local Model<a class="headerlink" href="#with-local-model_1" title="Permanent link">&para;</a></h3>
 <p>Download a model:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;huggingface_hub[cli]&quot;</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>huggingface-cli<span class="w"> </span>download<span class="w"> </span>ChristianAzinn/snowflake-arctic-embed-s-gguf<span class="w"> </span>--include<span class="o">=</span>snowflake-arctic-embed-s-f16.GGUF<span class="w"> </span>--local-dir<span class="w"> </span>snowflake-arctic-embed-s
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;huggingface_hub[cli]&quot;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>huggingface-cli<span class="w"> </span>download<span class="w"> </span>ChristianAzinn/snowflake-arctic-embed-s-gguf<span class="w"> </span>--include<span class="o">=</span>snowflake-arctic-embed-s-f16.GGUF<span class="w"> </span>--local-dir<span class="w"> </span>snowflake-arctic-embed-s
 </span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.llamacpp</span> <span class="kn">import</span> <span class="n">LlamaCppEmbeddingFunction</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">LlamaCppEmbeddingFunction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;snowflake-arctic-embed-s/snowflake-arctic-embed-s-f16.GGUF&quot;</span><span class="p">)</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.llamacpp</span> <span class="kn">import</span> <span class="n">LlamaCppEmbeddingFunction</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">LlamaCppEmbeddingFunction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;snowflake-arctic-embed-s/snowflake-arctic-embed-s-f16.GGUF&quot;</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<h2 id="google-vertex-ai">Google Vertex AI<a class="headerlink" href="#google-vertex-ai" title="Permanent link">&para;</a></h2>
+<p>A convenient way to run Google Vertex AI models to generate embeddings.</p>
+<p>Google Vertex AI uses variety of authentication methods. The most secure is either service account key file or Google Application Default Credentials.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.google</span> <span class="kn">import</span> <span class="n">GoogleVertexAiEmbeddings</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">GoogleVertexAiEmbeddings</span><span class="p">()</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<h3 id="auth-with-service-account-key-file">Auth with service account key file<a class="headerlink" href="#auth-with-service-account-key-file" title="Permanent link">&para;</a></h3>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.google</span> <span class="kn">import</span> <span class="n">GoogleVertexAiEmbeddings</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">google.oauth2</span> <span class="kn">import</span> <span class="n">service_account</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span><span class="s2">&quot;path/to/service-account-key.json&quot;</span><span class="p">)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">GoogleVertexAiEmbeddings</span><span class="p">(</span><span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">ef</span><span class="p">([</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;goodbye world&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<h2 id="mistral-ai">Mistral AI<a class="headerlink" href="#mistral-ai" title="Permanent link">&para;</a></h2>
+<p>A convenient way to generate embeddings using Mistral AI models.</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.mistral</span> <span class="kn">import</span> <span class="n">MistralAiEmbeddings</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">MistralAiEmbeddings</span><span class="p">()</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">col</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_texts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">],</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="cloudflare-workers-ai">Cloudflare Workers AI<a class="headerlink" href="#cloudflare-workers-ai" title="Permanent link">&para;</a></h2>
+<p>A convenient way to generate embeddings using Cloudflare Workers AI models.</p>
+<p><em>Using with Account ID and API Token:</em></p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span> <span class="nn">chromadb</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.cloudflare</span> <span class="kn">import</span> <span class="n">CloudflareWorkersAIEmbeddings</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">CloudflareWorkersAIEmbeddings</span><span class="p">(</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;@cf/baai/bge-base-en-v1.5&quot;</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">api_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CF_API_TOKEN&quot;</span><span class="p">),</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">account_id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CF_ACCOUNT_ID&quot;</span><span class="p">)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">)</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">col</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_or_create_collection</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">embedding_function</span><span class="o">=</span><span class="n">ef</span><span class="p">)</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">col</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id1&quot;</span><span class="p">,</span> <span class="s2">&quot;id2&quot;</span><span class="p">,</span> <span class="s2">&quot;id3&quot;</span><span class="p">],</span> <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">,</span> <span class="s2">&quot;doc2&quot;</span><span class="p">,</span> <span class="s2">&quot;doc3&quot;</span><span class="p">])</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">col</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_texts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lorem ipsum...&quot;</span><span class="p">],</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></code></pre></div>
+<p><em>Using with Gateway Endpoint:</em></p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span> <span class="nn">chromadbx.embeddings.cloudflare</span> <span class="kn">import</span> <span class="n">CloudflareWorkersAIEmbeddings</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">ef</span> <span class="o">=</span> <span class="n">CloudflareWorkersAIEmbeddings</span><span class="p">(</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;@cf/baai/bge-base-en-v1.5&quot;</span><span class="p">,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">api_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CF_API_TOKEN&quot;</span><span class="p">),</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="n">gateway_url</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CF_GATEWAY_ENDPOINT&quot;</span><span class="p">)</span> <span class="c1"># &quot;https://gateway.ai.cloudflare.com/v1/[account_id]/[project]/workers-ai&quot;</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># ... rest of the code</span>
 </span></code></pre></div>
 
 
@@ -660,10 +872,10 @@ issue.</p>
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.indexes"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.indexes"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
         <script src="../javascripts/gtag.js"></script>
       
