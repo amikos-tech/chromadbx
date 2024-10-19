@@ -40,6 +40,7 @@ jobs:
           poetry run pre-commit run --all-files check-yaml
   test:
     runs-on: [ "ubuntu-latest" ]
+    needs: [ lint ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.10
