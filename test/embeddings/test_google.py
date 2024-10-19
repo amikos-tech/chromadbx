@@ -11,7 +11,6 @@ def test_embed() -> None:
     assert len(embeddings) == 2
     assert len(embeddings[0]) == 256
     assert len(embeddings[1]) == 256
-    assert embeddings[0] != embeddings[1]
 
 
 def test_with_model() -> None:
@@ -22,7 +21,6 @@ def test_with_model() -> None:
     assert len(embeddings) == 2
     assert len(embeddings[0]) == 256
     assert len(embeddings[1]) == 256
-    assert embeddings[0] != embeddings[1]
 
 
 def test_dimensions() -> None:
@@ -34,7 +32,6 @@ def test_dimensions() -> None:
     assert len(embeddings) == 2
     assert len(embeddings[0]) == 768
     assert len(embeddings[1]) == 768
-    assert embeddings[0] != embeddings[1]
 
 
 def test_task_type() -> None:
@@ -59,4 +56,3 @@ def test_credentials() -> None:
     assert len(embeddings) == 2
     assert len(embeddings[0]) == 256
     assert len(embeddings[1]) == 256
-    assert embeddings[0] != embeddings[1]

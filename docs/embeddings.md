@@ -118,7 +118,6 @@ col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
 ### Auth with service account key file
 
 ```py
-import chromadb
 from chromadbx.embeddings.google import GoogleVertexAiEmbeddings
 from google.oauth2 import service_account
 
@@ -126,4 +125,23 @@ credentials = service_account.Credentials.from_service_account_file("path/to/ser
 ef = GoogleVertexAiEmbeddings(credentials=credentials)
 
 ef(["hello world", "goodbye world"])
+```
+
+## Mistral AI
+
+A convenient way to generate embeddings using Mistral AI models.
+
+
+```py
+import chromadb
+from chromadbx.embeddings.mistral import MistralAiEmbeddings
+
+ef = MistralAiEmbeddings()
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+col.query(query_texts=["lorem ipsum..."], n_results=2)
 ```

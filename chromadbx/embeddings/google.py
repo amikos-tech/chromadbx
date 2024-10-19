@@ -18,7 +18,7 @@ class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]):
         api_transport: Optional[str] = None,
     ) -> None:
         """
-        Initialize the OnnxRuntimeEmbeddings.
+        Initialize the GoogleVertexAi.
 
         :param model_name: The name of the model to use. Defaults to "text-embedding-004".
         :param project_id: The project ID to use. Defaults to None.
