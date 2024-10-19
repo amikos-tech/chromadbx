@@ -475,6 +475,20 @@ files = [
 ]
 
 [[package]]
+name = "eval-type-backport"
+version = "0.2.0"
+description = "Like `typing._eval_type`, but lets older Python versions use newer typing features."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "eval_type_backport-0.2.0-py3-none-any.whl", hash = "sha256:ac2f73d30d40c5a30a80b8739a789d6bb5e49fdffa66d7912667e2015d9c9933"},
+    {file = "eval_type_backport-0.2.0.tar.gz", hash = "sha256:68796cfbc7371ebf923f03bdf7bef415f3ec098aeced24e054b253a0e78f7b37"},
+]
+
+[package.extras]
+tests = ["pytest"]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.2.2"
 description = "Backport of PEP 654 (exception groups)"
@@ -490,18 +504,18 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "fastapi"
-version = "0.113.0"
+version = "0.115.2"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi-0.113.0-py3-none-any.whl", hash = "sha256:c8d364485b6361fb643d53920a18d58a696e189abcb901ec03b487e35774c476"},
-    {file = "fastapi-0.113.0.tar.gz", hash = "sha256:b7cf9684dc154dfc93f8b718e5850577b529889096518df44defa41e73caf50f"},
+    {file = "fastapi-0.115.2-py3-none-any.whl", hash = "sha256:61704c71286579cc5a598763905928f24ee98bfcc07aabe84cfefb98812bbc86"},
+    {file = "fastapi-0.115.2.tar.gz", hash = "sha256:3995739e0b09fa12f984bce8fa9ae197b35d433750d3d312422d846e283697ee"},
 ]
 
 [package.dependencies]
 pydantic = ">=1.7.4,<1.8 || >1.8,<1.8.1 || >1.8.1,<2.0.0 || >2.0.0,<2.0.1 || >2.0.1,<2.1.0 || >2.1.0,<3.0.0"
-starlette = ">=0.37.2,<0.39.0"
+starlette = ">=0.37.2,<0.41.0"
 typing-extensions = ">=4.8.0"
 
 [package.extras]
@@ -936,6 +950,17 @@ files = [
 ]
 
 [[package]]
+name = "jsonpath-python"
+version = "1.0.6"
+description = "A more powerful JSONPath implementation in modern python"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "jsonpath-python-1.0.6.tar.gz", hash = "sha256:dd5be4a72d8a2995c3f583cf82bf3cd1a9544cfdabf2d22595b67aff07349666"},
+    {file = "jsonpath_python-1.0.6-py3-none-any.whl", hash = "sha256:1e3b78df579f5efc23565293612decee04214609208a2335884b3ee3f786b575"},
+]
+
+[[package]]
 name = "kubernetes"
 version = "30.1.0"
 description = "Kubernetes python client"
@@ -960,6 +985,44 @@ websocket-client = ">=0.32.0,<0.40.0 || >0.40.0,<0.41.dev0 || >=0.43.dev0"
 
 [package.extras]
 adal = ["adal (>=1.0.2)"]
+
+[[package]]
+name = "llama-embedder"
+version = "0.0.7"
+description = "LLama.cpp embedder library python bindings"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "llama_embedder-0.0.7-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:143c1dd1e493098e1bc5fd5ef173ef4b6cdb46eca2ec89e4be817aa08cc94620"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:4826cad345fa4b3947e51251aae4d5abf411c5c654ae867fb2a51edfbfbf8603"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7d2e60e6498e46f966d5049bec76d1d10f025d5e69c130d26a519cdfc5de4c1e"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0fccbe2fcdc7fe196e3874795242db31c63c0d0b3cca453932dbc35de0616b4e"},
+    {file = "llama_embedder-0.0.7-cp310-cp310-win_amd64.whl", hash = "sha256:8333b86f0967b967b0d3f149dc5ad466e5b8b69b247f2a33cfb7c4c55af7e59f"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:e5f87c609cb2506fb1b75927cae718fa750dc1d7a9410d3a283e1ebe6a446318"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f0c95c8a9ad82b23ae726b8f237f6f5430c03b1a8b3a0cc0e67722e06fb3494a"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c309bcfd32d2540dc48c045b84eb6ecaf5e1ba32d978939bbc46a2051bf13c3b"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2f00dc03de57415f65dbdb48755c47005d86020fa143dbf11eb75953356786e3"},
+    {file = "llama_embedder-0.0.7-cp311-cp311-win_amd64.whl", hash = "sha256:505b5dcd7999e039907ccee9f8f705ec9287404a79e175f6f0894df73d794894"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:60b74dffe4bb5786cefdb75ccdc0a3534f9b2d097213ba34d766c03ac519b206"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:813602f2d3a50d57b7a803a35889f09754abed3508a867d9551c280af228c9cd"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:67ad0077b1e7d1fd3d71ee611ec0a7b517eb8e4055c5254d733ec8e2a0ff77ce"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6f0f2597c72077af3885c01931187942cac19f9b44004e6f9ebfe2bb895c8671"},
+    {file = "llama_embedder-0.0.7-cp312-cp312-win_amd64.whl", hash = "sha256:705a933316979f19d670897c3655937507a0e117989e83bdd72abf3020ebdf94"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:2d62a4b11bd70b3919bb076bbabb75ae50545365736f896893d87d9ce7cbad7e"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:b5b3c3c1f518f365fca6284a710ec9bee8c312edafc0534e450f55cf9dd35be3"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7f279ed5548c3d19e0fa08ab2fc075d973c64f8b7932a581aab74231ebac2094"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9d8e75e816d06ef82962598dfbad5e7ce64819b15a6bdaf0abd1cc77fb0b0972"},
+    {file = "llama_embedder-0.0.7-cp38-cp38-win_amd64.whl", hash = "sha256:885008f74a0d53e519624193a73b38176951a6ca9229dd9ab3d36f19e5b01180"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:dd493e4509487cfa60252077169b09398ef74ed73cf236204eed73f8e9bf3a19"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:7f4b4b4e6c9750d775063f19df0d1889a0b766d818854c06963b378236143307"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2c0de5b95be1c69ece6ad23e3896a28a43cb791d2aecdcf22f9f2eb247e5c864"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2fca336108dc4b0d8a47b56a6c01c19dd91cbd042c14a20e6f297827e53feda3"},
+    {file = "llama_embedder-0.0.7-cp39-cp39-win_amd64.whl", hash = "sha256:f73f8ea1eecdd1ccd7f48bb23a61625c824921d3cfcea6998e43f80935d74680"},
+    {file = "llama_embedder-0.0.7.tar.gz", hash = "sha256:578b638457555abceb6e98e638cc5361306add64a5d93ea751f8f23f0dc80e40"},
+]
+
+[package.extras]
+test = ["pytest (>=6.0)"]
 
 [[package]]
 name = "markdown-it-py"
@@ -995,6 +1058,28 @@ files = [
     {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
     {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
 ]
+
+[[package]]
+name = "mistralai"
+version = "1.1.0"
+description = "Python Client SDK for the Mistral AI API."
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "mistralai-1.1.0-py3-none-any.whl", hash = "sha256:eea0938975195f331d0ded12d14e3c982f09f1b68210200ed4ff0c6b9b22d0fb"},
+    {file = "mistralai-1.1.0.tar.gz", hash = "sha256:9d1fe778e0e8c6ddab714e6a64c6096bd39cfe119ff38ceb5019d8e089df08ba"},
+]
+
+[package.dependencies]
+eval-type-backport = ">=0.2.0,<0.3.0"
+httpx = ">=0.27.0,<0.28.0"
+jsonpath-python = ">=1.0.6,<2.0.0"
+pydantic = ">=2.9.0,<3.0.0"
+python-dateutil = "2.8.2"
+typing-inspect = ">=0.9.0,<0.10.0"
+
+[package.extras]
+gcp = ["google-auth (==2.27.0)", "requests (>=2.32.3,<3.0.0)"]
 
 [[package]]
 name = "mmh3"
@@ -1825,13 +1910,13 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments
 
 [[package]]
 name = "python-dateutil"
-version = "2.9.0.post0"
+version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 files = [
-    {file = "python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3"},
-    {file = "python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"},
+    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 
 [package.dependencies]
@@ -2049,13 +2134,13 @@ files = [
 
 [[package]]
 name = "starlette"
-version = "0.38.4"
+version = "0.40.0"
 description = "The little ASGI library that shines."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "starlette-0.38.4-py3-none-any.whl", hash = "sha256:526f53a77f0e43b85f583438aee1a940fd84f8fd610353e8b0c1a77ad8a87e76"},
-    {file = "starlette-0.38.4.tar.gz", hash = "sha256:53a7439060304a208fea17ed407e998f46da5e5d9b1addfea3040094512a6379"},
+    {file = "starlette-0.40.0-py3-none-any.whl", hash = "sha256:c494a22fae73805376ea6bf88439783ecfba9aac88a43911b48c653437e784c4"},
+    {file = "starlette-0.40.0.tar.gz", hash = "sha256:1a3139688fb298ce5e2d661d37046a66ad996ce94be4d4983be019a23a04ea35"},
 ]
 
 [package.dependencies]
@@ -2272,6 +2357,21 @@ files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
 ]
+
+[[package]]
+name = "typing-inspect"
+version = "0.9.0"
+description = "Runtime inspection utilities for typing module."
+optional = false
+python-versions = "*"
+files = [
+    {file = "typing_inspect-0.9.0-py3-none-any.whl", hash = "sha256:9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f"},
+    {file = "typing_inspect-0.9.0.tar.gz", hash = "sha256:b23fc42ff6f6ef6954e4852c1fb512cdd18dbea03134f91f856a95ccc9461f78"},
+]
+
+[package.dependencies]
+mypy-extensions = ">=0.3.0"
+typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "tzdata"
@@ -2707,10 +2807,10 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 type = ["pytest-mypy"]
 
 [extras]
-embeddings = []
+embeddings = ["llama-embedder"]
 ids = ["nanoid", "ulid-py"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<=4.0"
-content-hash = "f5d49203ef7b13d2eb3e4232b81d00188b115bc95209332b6d92796c339e2518"
+content-hash = "269e58bfcf3c14204f87011c7a739b77db93cff7968bf497e7367e2bc7188d1c"
