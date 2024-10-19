@@ -145,3 +145,44 @@ col = client.get_or_create_collection("test", embedding_function=ef)
 col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
 col.query(query_texts=["lorem ipsum..."], n_results=2)
 ```
+
+
+## Cloudflare Workers AI
+
+A convenient way to generate embeddings using Cloudflare Workers AI models.
+
+_Using with Account ID and API Token:_
+
+```py
+import os
+import chromadb
+from chromadbx.embeddings.cloudflare import CloudflareWorkersAIEmbeddings
+
+ef = CloudflareWorkersAIEmbeddings(
+    model_name="@cf/baai/bge-base-en-v1.5",
+    api_token=os.getenv("CF_API_TOKEN"),
+    account_id=os.getenv("CF_ACCOUNT_ID")
+)
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+col.query(query_texts=["lorem ipsum..."], n_results=2)
+```
+
+_Using with Gateway Endpoint:_
+
+```py
+import os
+from chromadbx.embeddings.cloudflare import CloudflareWorkersAIEmbeddings
+
+ef = CloudflareWorkersAIEmbeddings(
+    model_name="@cf/baai/bge-base-en-v1.5",
+    api_token=os.getenv("CF_API_TOKEN"),
+    gateway_url=os.getenv("CF_GATEWAY_ENDPOINT") # "https://gateway.ai.cloudflare.com/v1/[account_id]/[project]/workers-ai"
+)
+
+# ... rest of the code
+```
