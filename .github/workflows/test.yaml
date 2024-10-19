@@ -79,3 +79,5 @@ jobs:
           set -e
           poetry update --with dev
           poetry run pytest
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
