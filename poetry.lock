@@ -2057,12 +2057,13 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "rsa"
-version = "4.2"
+version = "4.7"
 description = "Pure-Python RSA implementation"
 optional = false
-python-versions = "*"
+python-versions = ">=3.5, <4"
 files = [
-    {file = "rsa-4.2.tar.gz", hash = "sha256:aaefa4b84752e3e99bd8333a2e1e3e7a7da64614042bd66f775573424370108a"},
+    {file = "rsa-4.7-py3-none-any.whl", hash = "sha256:a8774e55b59fd9fc893b0d05e9bfc6f47081f46ff5b46f39ccf24631b7be356b"},
+    {file = "rsa-4.7.tar.gz", hash = "sha256:69805d6b69f56eb05b62daea3a7dbd7aa44324ad1306445e05da8060232d00f4"},
 ]
 
 [package.dependencies]
