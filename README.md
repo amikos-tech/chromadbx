@@ -8,9 +8,9 @@ pip install chromadbx
 
 ## Features
 
-- [Query Builder](#queries) - build queries using a builder pattern
-- [ID generation](#id-generation) - generate IDs for documents
-- [Embeddings](docs/embeddings.md) - generate embeddings for your documents:
+- [Query Builder](https://github.com/amikos-tech/chromadbx#queries) - build queries using a builder pattern
+- [ID generation](https://github.com/amikos-tech/chromadbx#id-generation) - generate IDs for documents
+- [Embeddings](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md) - generate embeddings for your documents:
     - OnnxRuntime embeddings
     - Llama.cpp embeddings
     - Google Vertex AI embeddings
