@@ -8,11 +8,14 @@ pip install chromadbx
 
 ## Features
 
-- ID generation
-- [Embeddings](docs/embeddings.md)
+- [Query Builder](#queries) - build queries using a builder pattern
+- [ID generation](#id-generation) - generate IDs for documents
+- [Embeddings](docs/embeddings.md) - generate embeddings for your documents:
     - OnnxRuntime embeddings
     - Llama.cpp embeddings
-
+    - Google Vertex AI embeddings
+    - Mistral AI embeddings
+    - Cloudflare Workers AI embeddings
 
 ## Usage
 
