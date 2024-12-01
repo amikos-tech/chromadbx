@@ -1,17 +1,21 @@
 import os
-from typing import Optional, cast
+from typing import Optional, Protocol, cast, TypeVar, runtime_checkable
 
-from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
+from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
 
 
-class MistralAiEmbeddings(EmbeddingFunction[Documents]):
+class MistralAIEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
+    """
+    This class is used to get embeddings for a list of texts using the Mistral AI API.
+    """
+
     def __init__(
         self,
         model_name: str = "mistral-embed",
         *,
-        api_key: Optional[str] = os.getenv("MISTRAL_API_KEY"),
+        api_key: Optional[str] = None,
         retries: Optional[int] = None,
-    ) -> None:
+    ):
         """
         Initialize the Mistral AI EF.
 

@@ -23,7 +23,7 @@ def client() -> chromadb.Client:
     client.reset()
 
 
-def test_default_generator(client) -> None:
+def test_default_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=IDGenerator(len(my_docs)), documents=my_docs)
@@ -31,7 +31,7 @@ def test_default_generator(client) -> None:
     assert all(uuid.UUID(_id, version=4) for _id in col.get()["ids"])
 
 
-def test_uuid_generator(client) -> None:
+def test_uuid_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=UUIDGenerator(len(my_docs)), documents=my_docs)
@@ -39,7 +39,7 @@ def test_uuid_generator(client) -> None:
     assert all(uuid.UUID(_id, version=4) for _id in col.get()["ids"])
 
 
-def test_custom_generator(client) -> None:
+def test_custom_generator(client: chromadb.Client) -> None:
     def sequential_generator(start: int = 0) -> Generator[str, None, None]:
         _next = start
         while True:
@@ -56,7 +56,7 @@ def test_custom_generator(client) -> None:
     ]  # this assumes sort order by ID is in effect in Chroma
 
 
-def test_nano_id_generator(client) -> None:
+def test_nano_id_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=NanoIDGenerator(len(my_docs)), documents=my_docs)
@@ -64,7 +64,7 @@ def test_nano_id_generator(client) -> None:
     assert all(len(_id) == 21 for _id in col.get()["ids"])
 
 
-def test_ulid_id_generator(client) -> None:
+def test_ulid_id_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=ULIDGenerator(len(my_docs)), documents=my_docs)
@@ -74,7 +74,7 @@ def test_ulid_id_generator(client) -> None:
     assert all(isinstance(ulid.parse(_id), ulid.ULID) for _id in col.get()["ids"])
 
 
-def test_random_sha256_id_generator(client) -> None:
+def test_random_sha256_id_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=RandomSHA256Generator(len(my_docs)), documents=my_docs)
@@ -82,7 +82,7 @@ def test_random_sha256_id_generator(client) -> None:
     assert all(len(_id) == 64 for _id in col.get()["ids"])
 
 
-def test_document_sha256_id_generator(client) -> None:
+def test_document_sha256_id_generator(client: chromadb.Client) -> None:
     col = client.get_or_create_collection("test")
     my_docs = [f"Document {_}" for _ in range(10)]
     col.add(ids=DocumentSHA256Generator(documents=my_docs), documents=my_docs)

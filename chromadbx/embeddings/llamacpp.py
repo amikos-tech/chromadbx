@@ -12,7 +12,7 @@ class PoolingType(int, Enum):
     LAST = 3
 
 
-class LlamaCppEmbeddingFunction(EmbeddingFunction[Documents]):
+class LlamaCppEmbeddingFunction(EmbeddingFunction[Documents]): # type: ignore[misc]
     def __init__(
         self,
         model_path: str,

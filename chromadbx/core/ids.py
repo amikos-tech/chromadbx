@@ -2,7 +2,7 @@ import hashlib
 import os
 import uuid
 from functools import partial
-from typing import Generator, Callable, Optional
+from typing import Generator, Callable, Iterator, List, Optional
 
 from chromadb import IDs, Documents
 
@@ -12,7 +12,7 @@ def uuid_id_generator() -> Generator[str, None, None]:
         yield f"{uuid.uuid4()}"
 
 
-class IDGenerator(IDs):
+class IDGenerator(IDs):  # type: ignore[misc]
     def __init__(
         self,
         ids_len: int,
@@ -37,20 +37,22 @@ class IDGenerator(IDs):
 
             The above code will generate UUIDs for each document.
         """
+        if generator is None:
+            generator = uuid_id_generator
         self.ids_len = ids_len
         self._generator = generator()
         self._items = list(next(self._generator) for _ in range(ids_len))
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.ids_len
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> str:
         return self._items[index]
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self._items)
 
-    def __json__(self):
+    def __json__(self) -> List[str]:
         return self._items
 
 

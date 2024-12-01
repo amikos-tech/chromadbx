@@ -1,9 +1,9 @@
-from typing import Optional, cast
+from typing import Optional, cast, Any
 
 from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
 
 
-class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]):
+class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]): # type: ignore[misc]
     def __init__(
         self,
         model_name: str = "text-embedding-004",
@@ -12,7 +12,7 @@ class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]):
         location: Optional[str] = None,
         dimensions: Optional[int] = 256,
         task_type: Optional[str] = "RETRIEVAL_DOCUMENT",
-        credentials: Optional[any] = None,
+        credentials: Optional[Any] = None,
         api_key: Optional[str] = None,
         api_endpoint: Optional[str] = None,
         api_transport: Optional[str] = None,

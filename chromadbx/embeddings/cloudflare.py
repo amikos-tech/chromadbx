@@ -10,7 +10,7 @@ from chromadb import Documents, EmbeddingFunction, Embeddings
 logger = logging.getLogger(__name__)
 
 
-class CloudflareWorkersAIEmbeddings(EmbeddingFunction[Documents]):
+class CloudflareWorkersAIEmbeddings(EmbeddingFunction[Documents]): # type: ignore[misc]
     # Follow API Quickstart for Cloudflare Workers AI
     # https://developers.cloudflare.com/workers-ai/
     # Information about the text embedding modules in Google Vertex AI
