@@ -11,17 +11,21 @@ from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
 logger = logging.getLogger(__name__)
 
 
-class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
+class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
+    """
+    This class is used to get embeddings for a list of texts using the OnnxRuntime.
+    """
+
     def __init__(
         self,
-        model_path,
+        model_path: str,
         *,
         preferred_providers: Optional[List[str]] = None,
         max_length: Optional[int] = 256,
         enabled_padding: Optional[bool] = True,
         hf_download: Optional[bool] = False,
         model_cache_dir: Optional[str] = None,
-    ) -> None:
+    ):
         """
         Initialize the OnnxRuntimeEmbeddings.
 
@@ -102,7 +106,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         for i in range(0, len(documents), batch_size):
             input_names = [input.name for input in self.model.get_inputs()]
             batch = documents[i : i + batch_size]
-            encoded = [self.tokenizer.encode(d) for d in batch]
+            encoded = [self.tokenizer.encode(d) for d in batch]  # type: ignore[attr-defined]
             input_ids = np.array([e.ids for e in encoded])
             attention_mask = np.array([e.attention_mask for e in encoded])
             onnx_input = {
@@ -129,7 +133,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
         return np.concatenate(all_embeddings)
 
     @cached_property
-    def tokenizer(self) -> "Tokenizer":  # noqa F821
+    def tokenizer(self) -> "Tokenizer":  # type: ignore # noqa: F821
         # TODO is this brittle? Can tokenizer.json be in different place?
         tokenizer = self.Tokenizer.from_file(
             os.path.join(self._local_model_path, "tokenizer.json")
@@ -140,10 +144,10 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):
             tokenizer.enable_padding(length=self._max_length)
         # tokenizer.enable_truncation(max_length=256)
         # tokenizer.enable_padding(pad_id=0, pad_token="[PAD]", length=256)
-        return tokenizer
+        return tokenizer  # type: ignore
 
     @cached_property
-    def model(self) -> "InferenceSession":  # noqa F821
+    def model(self) -> "InferenceSession":  # type: ignore[name-defined] # noqa: F821
         if self._preferred_providers is None or len(self._preferred_providers) == 0:
             if len(self.ort.get_available_providers()) > 0:
                 logger.debug(

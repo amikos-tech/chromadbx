@@ -26,7 +26,7 @@ def get_model() -> str:
     return os.path.join("local_model", "all-MiniLM-L6-v2")
 
 
-def test_download(get_model) -> None:
+def test_download(get_model: str) -> None:
     ef = OnnxRuntimeEmbeddings(
         model_path=get_model, preferred_providers=["CPUExecutionProvider"]
     )
