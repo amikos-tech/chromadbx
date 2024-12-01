@@ -11,10 +11,11 @@ from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
 logger = logging.getLogger(__name__)
 
 
-class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]): # type: ignore[misc]
+class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
     """
     This class is used to get embeddings for a list of texts using the OnnxRuntime.
     """
+
     def __init__(
         self,
         model_path: str,
@@ -105,7 +106,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]): # type: ignore[misc]
         for i in range(0, len(documents), batch_size):
             input_names = [input.name for input in self.model.get_inputs()]
             batch = documents[i : i + batch_size]
-            encoded = [self.tokenizer.encode(d) for d in batch] # type: ignore[attr-defined]
+            encoded = [self.tokenizer.encode(d) for d in batch]  # type: ignore[attr-defined]
             input_ids = np.array([e.ids for e in encoded])
             attention_mask = np.array([e.attention_mask for e in encoded])
             onnx_input = {

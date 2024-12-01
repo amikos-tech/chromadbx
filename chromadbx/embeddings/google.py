@@ -3,7 +3,7 @@ from typing import Optional, cast, Any
 from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
 
 
-class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]): # type: ignore[misc]
+class GoogleVertexAiEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
     def __init__(
         self,
         model_name: str = "text-embedding-004",
