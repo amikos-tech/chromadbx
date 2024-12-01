@@ -1,3 +1,4 @@
+import os
 from typing import Optional, cast
 
 from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
@@ -12,7 +13,7 @@ class MistralAIEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
         self,
         model_name: str = "mistral-embed",
         *,
-        api_key: Optional[str] = None,
+        api_key: Optional[str] = os.getenv("MISTRAL_API_KEY"),
         retries: Optional[int] = None,
     ):
         """
