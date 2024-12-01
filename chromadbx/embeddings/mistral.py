@@ -1,5 +1,4 @@
-import os
-from typing import Optional, Protocol, cast, TypeVar, runtime_checkable
+from typing import Optional, cast
 
 from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
 

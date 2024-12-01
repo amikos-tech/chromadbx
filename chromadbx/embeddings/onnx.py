@@ -133,7 +133,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
         return np.concatenate(all_embeddings)
 
     @cached_property
-    def tokenizer(self) -> "Tokenizer":  # type: ignore
+    def tokenizer(self) -> "Tokenizer":  # type: ignore # noqa: F821
         # TODO is this brittle? Can tokenizer.json be in different place?
         tokenizer = self.Tokenizer.from_file(
             os.path.join(self._local_model_path, "tokenizer.json")
@@ -147,7 +147,7 @@ class OnnxRuntimeEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
         return tokenizer  # type: ignore
 
     @cached_property
-    def model(self) -> "InferenceSession":  # type: ignore[name-defined]
+    def model(self) -> "InferenceSession":  # type: ignore[name-defined] # noqa: F821
         if self._preferred_providers is None or len(self._preferred_providers) == 0:
             if len(self.ort.get_available_providers()) > 0:
                 logger.debug(
