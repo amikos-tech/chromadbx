@@ -9,10 +9,12 @@ class TogetherEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[m
     It requires an API key and a model name. The default model name is "togethercomputer/m2-bert-80M-8k-retrieval".
     For more, refer to the official documentation at "https://docs.together.ai/docs/embeddings-python".
     """
-    def __init__(self, 
-                 api_key: str,
-                 model_name: Optional[str] = "togethercomputer/m2-bert-80M-8k-retrieval",
-                 ):
+
+    def __init__(
+        self,
+        api_key: str,
+        model_name: Optional[str] = "togethercomputer/m2-bert-80M-8k-retrieval",
+    ):
         """
         Initialize the TogetherEmbeddingFunction.
 
@@ -30,7 +32,7 @@ class TogetherEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[m
         together.api_key = api_key
         self.model_name = model_name
         self.client = together.Together()
-    
+
     def __call__(self, input: Documents) -> Embeddings:
         """
         Get the embeddings for a list of texts.
@@ -50,6 +52,5 @@ class TogetherEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[m
         embeddings = ef(["hello world", "goodbye world"])
         ```
         """
-        outputs = self.client.embeddings.create(input = input, model=self.model_name)
-        return [outputs.data[i].embedding for i in range(len(input))]
-
+        outputs = self.client.embeddings.create(input=input, model=self.model_name)
+        return cast(Embeddings, [outputs.data[i].embedding for i in range(len(input))])

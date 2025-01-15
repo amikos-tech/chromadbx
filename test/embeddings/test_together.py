@@ -4,12 +4,13 @@ from chromadbx.embeddings.together import TogetherEmbeddingFunction
 
 together = pytest.importorskip("together", reason="together not installed")
 
+
 @pytest.mark.skipif(
     os.getenv("TOGETHER_API_KEY") is None,
-    reason="TOGETHER_API_KEY environment variable is not set"
+    reason="TOGETHER_API_KEY environment variable is not set",
 )
 def test_together() -> None:
-    ef = TogetherEmbeddingFunction(api_key=os.getenv("TOGETHER_API_KEY"))
+    ef = TogetherEmbeddingFunction(api_key=os.getenv("TOGETHER_API_KEY", ""))
     texts = ["hello world", "goodbye world"]
     embeddings = ef(texts)
     assert embeddings is not None
