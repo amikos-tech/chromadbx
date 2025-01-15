@@ -102,6 +102,10 @@ A convenient way to run Google Vertex AI models to generate embeddings.
 
 Google Vertex AI uses variety of authentication methods. The most secure is either service account key file or Google Application Default Credentials.
 
+### Auth with gcloud
+
+The gloud auth will happen automatically so you do not need to provide any credentials to the embedding function.
+
 ```py
 import chromadb
 from chromadbx.embeddings.google import GoogleVertexAiEmbeddings
@@ -123,6 +127,16 @@ from google.oauth2 import service_account
 
 credentials = service_account.Credentials.from_service_account_file("path/to/service-account-key.json")
 ef = GoogleVertexAiEmbeddings(credentials=credentials)
+
+ef(["hello world", "goodbye world"])
+```
+
+### Auth with API Key
+
+```py
+from chromadbx.embeddings.google import GoogleVertexAiEmbeddings
+
+ef = GoogleVertexAiEmbeddings(api_key="API_KEY", project_id="MY_PROJECT_ID")
 
 ef(["hello world", "goodbye world"])
 ```
