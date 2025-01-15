@@ -17,6 +17,7 @@ pip install chromadbx
     - [Mistral AI](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#mistral-ai) embeddings
     - [Cloudflare Workers AI](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#cloudflare-workers-ai) embeddings
     - [SpaCy](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#spacy) embeddings
+    - [Together](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#together) embeddings
 
 ## Usage
 
