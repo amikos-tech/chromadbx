@@ -200,3 +200,32 @@ ef = CloudflareWorkersAIEmbeddings(
 
 # ... rest of the code
 ```
+
+## Spacy
+
+A convenient way to generate embeddings using Spacy models.
+
+To use Spacy, you need to install the `spacy` package.
+
+```bash
+pip install spacy
+```
+
+You will also need to download the model you want to use.
+
+```bash
+python -m spacy download en_core_web_lg
+```
+
+```py
+import chromadb
+from chromadbx.embeddings.spacy import SpacyEmbeddingFunction
+
+ef = SpacyEmbeddingFunction(model_name="en_core_web_lg")
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+```
