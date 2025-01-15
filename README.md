@@ -1,4 +1,4 @@
-# ChromaX: An experimental utilities package for Chroma vector database
+# ChromaX: An experimental utilities package for Chroma AI application database
 
 ## Installation
 
@@ -11,11 +11,12 @@ pip install chromadbx
 - [Query Builder](https://github.com/amikos-tech/chromadbx#queries) - build queries using a builder pattern
 - [ID generation](https://github.com/amikos-tech/chromadbx#id-generation) - generate IDs for documents
 - [Embeddings](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md) - generate embeddings for your documents:
-    - OnnxRuntime embeddings
-    - Llama.cpp embeddings
-    - Google Vertex AI embeddings
-    - Mistral AI embeddings
-    - Cloudflare Workers AI embeddings
+    - [OnnxRuntime](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#onnx-runtime) embeddings
+    - [Llama.cpp](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#llamacpp) embeddings
+    - [Google Vertex AI](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#google-vertex-ai) embeddings
+    - [Mistral AI](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#mistral-ai) embeddings
+    - [Cloudflare Workers AI](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#cloudflare-workers-ai) embeddings
+    - [SpaCy](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#spacy) embeddings
 
 ## Usage
 
