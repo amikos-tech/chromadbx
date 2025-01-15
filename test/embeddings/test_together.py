@@ -15,4 +15,4 @@ def test_together() -> None:
     embeddings = ef(texts)
     assert embeddings is not None
     assert len(embeddings) == 2
-    assert len(embeddings[0]) == 1536
+    assert len(embeddings[0]) == 768
