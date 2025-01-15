@@ -38,6 +38,7 @@ together = "^1.3.11"
 [tool.poetry.extras]
 ids = ["ulid-py", "nanoid"]
 embeddings = ["llama-embedder", "onnxruntime"]
+core = ["chromadb"]
 
 [build-system]
 requires = ["poetry-core"]
