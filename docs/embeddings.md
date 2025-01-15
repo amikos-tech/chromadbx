@@ -229,3 +229,27 @@ col = client.get_or_create_collection("test", embedding_function=ef)
 
 col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
 ```
+
+## Together
+
+A convenient way to generate embeddings using Together models. To use the embedding function, you need to install the `together` package.
+
+```bash
+pip install together
+```
+
+Additionally, you need to get an [API key from Together](https://api.together.xyz/settings/api-keys).
+
+```py
+import os
+import chromadb
+from chromadbx.embeddings.together import TogetherEmbeddingFunction
+
+ef = TogetherEmbeddingFunction(api_key=os.getenv("TOGETHER_API_KEY"))
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+```
