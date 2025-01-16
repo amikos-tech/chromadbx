@@ -31,6 +31,7 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[misc
         max_tokens_per_text: Optional[int] = 8192,
         long_text_mode: Optional[LongTextMode] = LongTextMode.TRUNCATE,
         task_type: Optional[TaskType] = TaskType.SEARCH_DOCUMENT,
+        timeout: Optional[float] = 60.0,
     ) -> None:
         """
         Initialize the Nomic Embedding Function.
@@ -44,6 +45,7 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[misc
             max_tokens_per_text (int): The maximum number of tokens per text. E.g. 8192 for "nomic-embed-text-v1.5".
             long_text_mode (str): The mode to use for long texts. E.g. "truncate" or "mean".
             task_type (str): The task type to use for the Nomic Embedding API. E.g. "search_document", "search_query", "classification", and "clustering".
+            timeout (float): The timeout for the Nomic Embedding API. E.g. 60.0 for 60 seconds.
         """
         try:
             import httpx
@@ -65,7 +67,7 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[misc
         self._dimensionality = dimensionality
         self._long_text_mode = long_text_mode
         self._max_tokens_per_text = max_tokens_per_text
-        self._client = httpx.Client()
+        self._client = httpx.Client(timeout=timeout)
         self._client.headers.update(
             {
                 "Content-Type": "application/json",
