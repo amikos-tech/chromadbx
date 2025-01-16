@@ -35,6 +35,21 @@ class MistralAIEmbeddings(EmbeddingFunction[Documents]):  # type: ignore[misc]
             )
 
     def __call__(self, input: Documents) -> Embeddings:
+        """
+        Get the embeddings for a list of texts.
+
+        Args:
+            input (Documents): A list of texts to get embeddings for.
+
+        Returns:
+            Embeddings: The embeddings for the texts.
+
+        Example:
+            >>> from chromadbx.embeddings.mistral import MistralAIEmbeddings
+            >>> ef = MistralAIEmbeddings()
+            >>> texts = ["Hello, world!", "How are you?"]
+            >>> embeddings = ef(texts)
+        """
         embeddings_batch_response = self._client.embeddings.create(
             model=self._model,
             inputs=input,
