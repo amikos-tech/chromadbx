@@ -1,42 +1,50 @@
-from typing import Dict, List, Protocol, TypeVar, Union, runtime_checkable
+from typing import Dict, List, Protocol, TypeVar, Union, cast, runtime_checkable
 
-from typing_extensions import TypedDict # TODO add typing_extensions to dependencies
+from typing_extensions import TypedDict  # TODO add typing_extensions to dependencies
 
 from chromadb.api.types import Documents, QueryResult, Document
+
 Score = float
 Scores = List[Score]
 Rerankable = Union[Documents, QueryResult]
 
 RerankerID = str
-class RerankedQueryResult(QueryResult):
+
+
+class RerankedQueryResult(QueryResult):  # type: ignore
     scores: Dict[RerankerID, List[Scores]]
+
 
 class RerankedDocuments(TypedDict):
     documents: List[Documents]
     scores: Dict[RerankerID, Scores]
 
+
 RankedResults = Union[List[Documents], List[RerankedQueryResult]]
 
-D = TypeVar("D", bound=Rerankable, contravariant=True) # type: ignore
-T = TypeVar("T", bound=RankedResults, contravariant=True) # type: ignore
+D = TypeVar("D", bound=Rerankable, contravariant=True)
+T = TypeVar("T", bound=RankedResults, covariant=True)
 
 
-def validate_rerankables(rerankables: D):
+def validate_rerankables(rerankables: D) -> None:
     """
     Validate the rerankables. Throws an exception if the rerankables are not valid.
     """
-    
+
     if isinstance(rerankables, Documents):
         if all(isinstance(document, Document) for document in rerankables):
             return
         raise ValueError("Documents must be a list of Document")
     elif isinstance(rerankables, QueryResult):
-        if rerankables.get("documents", None) is None or len(rerankables["documents"]) == 0:
+        if (
+            rerankables.get("documents", None) is None
+            or len(rerankables["documents"]) == 0
+        ):
             raise ValueError("QueryResult must have documents to rerank")
-        
+
 
 @runtime_checkable
-class RerankingFunction(Protocol[D,T]):
+class RerankingFunction(Protocol[D, T]):
     """
     A function that reranks the results of a query.
     """
@@ -52,8 +60,8 @@ class RerankingFunction(Protocol[D,T]):
         # Raise an exception if __call__ is not defined since it is expected to be defined
         call = getattr(cls, "__call__")
 
-        def __call__(self: RerankingFunction[D], rerankables: D) -> T:
+        def __call__(self: RerankingFunction[D, T], rerankables: D) -> T:
             validate_rerankables(rerankables)
-            return call(self, rerankables)
-        
+            return cast(T, call(self, rerankables))
+
         setattr(cls, "__call__", __call__)
