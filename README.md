@@ -19,6 +19,7 @@ pip install chromadbx
     - [SpaCy](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#spacy) embeddings
     - [Together](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#together) embeddings.
     - [Nomic](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#nomic) embeddings.
+
 ## Usage
 
 ### Queries
