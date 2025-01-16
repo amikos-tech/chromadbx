@@ -4,17 +4,20 @@ from typing import Optional, cast
 
 from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
 
-class TaskType(str,Enum):
+
+class TaskType(str, Enum):
     SEARCH_DOCUMENT = "search_document"
     SEARCH_QUERY = "search_query"
     CLASSIFICATION = "classification"
     CLUSTERING = "clustering"
 
-class LongTextMode(str,Enum):
+
+class LongTextMode(str, Enum):
     TRUNCATE = "truncate"
     MEAN = "mean"
 
-class NomicEmbeddingFunction(EmbeddingFunction[Documents]):
+
+class NomicEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[misc]
     """
     Nomic Embedding Function using the Nomic Embedding API - https://docs.nomic.ai/atlas/models/text-embedding.
     """
@@ -50,7 +53,9 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):
             )
 
         if not api_key and os.getenv("NOMIC_API_KEY") is None:
-            raise ValueError("No Nomic API key provided or NOMIC_API_KEY environment variable is not set")
+            raise ValueError(
+                "No Nomic API key provided or NOMIC_API_KEY environment variable is not set"
+            )
         if not api_key:
             api_key = os.getenv("NOMIC_API_KEY")
 
@@ -61,10 +66,12 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):
         self._long_text_mode = long_text_mode
         self._max_tokens_per_text = max_tokens_per_text
         self._client = httpx.Client()
-        self._client.headers.update({
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-        })
+        self._client.headers.update(
+            {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            }
+        )
 
     def __call__(self, input: Documents) -> Embeddings:
         """
@@ -89,9 +96,11 @@ class NomicEmbeddingFunction(EmbeddingFunction[Documents]):
             json={
                 "model": self._model_name,
                 "texts": texts,
-                "task_type": self._task_type.value,
+                "task_type": self._task_type.value if self._task_type else None,
                 "dimensionality": self._dimensionality,
-                "long_text_mode": self._long_text_mode.value,
+                "long_text_mode": self._long_text_mode.value
+                if self._long_text_mode
+                else None,
                 "max_tokens_per_text": self._max_tokens_per_text,
             },
         )
