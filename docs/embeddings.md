@@ -253,3 +253,33 @@ col = client.get_or_create_collection("test", embedding_function=ef)
 
 col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
 ```
+
+
+## Nomic
+
+A convenient way to generate embeddings using Nomic models.
+
+To use the embedding function, you need to install the `nomic` package.
+
+```bash
+pip install nomic
+```
+
+Before you proceed, you will need to create an account and get an API key from [Nomic](https://atlas.nomic.ai).
+
+```py
+import os
+import chromadb
+from chromadbx.embeddings.nomic import NomicEmbeddingFunction
+
+ef = NomicEmbeddingFunction(api_key=os.getenv("NOMIC_API_KEY"))
+
+client = chromadb.Client()
+
+col = client.get_or_create_collection("test", embedding_function=ef)
+
+col.add(ids=["id1", "id2", "id3"], documents=["lorem ipsum...", "doc2", "doc3"])
+```
+
+> [!TIP]
+> Nomic supports dimensionality reduction which can save storage space required in Chroma without degrading retrieval quality. To take advantage of this use `dimensionality` parameter in the `NomicEmbeddingFunction` class.

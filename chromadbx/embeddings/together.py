@@ -44,13 +44,10 @@ class TogetherEmbeddingFunction(EmbeddingFunction[Documents]):  # type: ignore[m
             Embeddings: The embeddings for the texts.
 
         Example:
-        ```python
-        import os
-        from chromadbx.embeddings.together import TogetherEmbeddingFunction
-
-        ef = TogetherEmbeddingFunction(api_key=os.getenv("TOGETHER_API_KEY"))
-        embeddings = ef(["hello world", "goodbye world"])
-        ```
+            >>> import os
+            >>> from chromadbx.embeddings.together import TogetherEmbeddingFunction
+            >>> ef = TogetherEmbeddingFunction(api_key=os.getenv("TOGETHER_API_KEY"))
+            >>> embeddings = ef(["hello world", "goodbye world"])
         """
         outputs = self.client.embeddings.create(input=input, model=self.model_name)
         return cast(Embeddings, [outputs.data[i].embedding for i in range(len(input))])
