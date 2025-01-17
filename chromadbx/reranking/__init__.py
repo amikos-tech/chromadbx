@@ -1,24 +1,59 @@
-from typing import Dict, List, Protocol, TypeVar, Union, cast, runtime_checkable
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Protocol,
+    TypeVar,
+    Union,
+    cast,
+    runtime_checkable,
+)
 
+import numpy as np
 from typing_extensions import TypedDict  # TODO add typing_extensions to dependencies
 
-from chromadb.api.types import Documents, QueryResult, Document
+from chromadb.api.types import (
+    IDs,
+    Documents,
+    QueryResult,
+    Document,
+    PyEmbeddings,
+    Embeddings,
+    URI,
+    Loadable,
+    Metadata,
+    Include,
+)
 
-Score = float
-Scores = List[Score]
+Distance = float
+Distances = List[Distance]
 Rerankable = Union[Documents, QueryResult]
 
 RerankerID = str
 Queries = Union[str, List[str]]
 
 
-class RerankedQueryResult(QueryResult):  # type: ignore
-    scores: Dict[RerankerID, List[Scores]]
+class RerankedQueryResult(TypedDict):
+    ids: List[IDs]
+    embeddings: Optional[
+        Union[
+            List[Embeddings],
+            List[PyEmbeddings],
+            List[np.typing.NDArray[Union[np.int32, np.float32]]],
+        ]
+    ]
+    documents: Optional[List[List[Document]]]
+    uris: Optional[List[List[URI]]]
+    data: Optional[List[Loadable]]
+    metadatas: Optional[List[List[Metadata]]]
+    distances: Optional[List[List[Distance]]]
+    included: Include
+    ranked_distances: Dict[RerankerID, List[Distance]]
 
 
 class RerankedDocuments(TypedDict):
     documents: List[Documents]
-    scores: Dict[RerankerID, Scores]
+    ranked_distances: Dict[RerankerID, Distances]
 
 
 RankedResults = Union[List[Documents], List[RerankedQueryResult]]
@@ -31,18 +66,19 @@ def validate_rerankables(queries: Queries, rerankables: D) -> None:
     """
     Validate the rerankables. Throws an exception if the rerankables are not valid.
     """
-
-    if queries is None or not isinstance(queries, str) or not isinstance(queries, list):
-        raise ValueError("Queries must be a string or a list of strings")
+    if queries is None or len(queries) == 0:
+        raise ValueError("Queries must not be empty")
     if rerankables is None or len(rerankables) == 0:
         raise ValueError("Rerankables results must not be empty")
-    if isinstance(queries, list) and isinstance(rerankables, Documents):
+    if isinstance(queries, list) and (
+        isinstance(rerankables, list) and all(isinstance(s, str) for s in rerankables)
+    ):
         raise ValueError("You can only rerank a single query at a time with Documents")
-    if isinstance(rerankables, Documents) and not all(
-        isinstance(document, Document) for document in rerankables
+    if isinstance(rerankables, list) and not all(
+        isinstance(s, str) for s in rerankables
     ):
         raise ValueError("Documents must be a list of Document (str)")
-    elif isinstance(rerankables, QueryResult):
+    elif isinstance(rerankables, dict):
         if (
             rerankables.get("documents", None) is None
             or len(rerankables["documents"]) == 0
@@ -66,13 +102,12 @@ class RerankingFunction(Protocol[D, T]):
 
     def __init_subclass__(cls) -> None:
         super().__init_subclass__()
-        # Raise an exception if __call__ is not defined since it is expected to be defined
         call = getattr(cls, "__call__")
 
         def __call__(
             self: RerankingFunction[D, T], queries: Queries, rerankables: D
         ) -> T:
             validate_rerankables(queries, rerankables)
-            return cast(T, call(self, rerankables))
+            return cast(T, call(self, queries, rerankables))
 
         setattr(cls, "__call__", __call__)
