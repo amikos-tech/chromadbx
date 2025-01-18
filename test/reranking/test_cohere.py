@@ -1,4 +1,3 @@
-
 import os
 
 import pytest
@@ -9,16 +8,17 @@ from unittest.mock import MagicMock
 
 _cohere = pytest.importorskip("cohere", reason="cohere not installed")
 
-def test_cohere_mock_rerank_documents()->None:
+
+def test_cohere_mock_rerank_documents() -> None:
     mock_client = MagicMock()
     mock_client.rerank.return_value = MagicMock(results=[])
-    
+
     cohere = CohereReranker(api_key="test")
     cohere._client = mock_client
-    
+
     queries = "What is the capital of the United States?"
     rerankables = ["Washington, D.C.", "New York", "Los Angeles"]
-    
+
     cohere(queries, rerankables)
     mock_client.rerank.assert_called_once_with(
         model="rerank-v3.5",
@@ -29,12 +29,13 @@ def test_cohere_mock_rerank_documents()->None:
         request_options=cohere._request_options,
     )
 
+
 @pytest.mark.skipif(
     os.getenv("COHERE_API_KEY") is None,
     reason="COHERE_API_KEY environment variable is not set",
 )
-def test_cohere_rerank_documents()->None:
-    cohere = CohereReranker(api_key=os.getenv("COHERE_API_KEY"))
+def test_cohere_rerank_documents() -> None:
+    cohere = CohereReranker(api_key=os.getenv("COHERE_API_KEY", ""))
     queries = "What is the capital of the United States?"
     rerankables = ["Washington, D.C.", "New York", "Los Angeles"]
     result = cohere(queries, rerankables)
