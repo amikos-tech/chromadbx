@@ -2,7 +2,7 @@ import os
 import pytest
 from chromadbx.embeddings.nomic import NomicEmbeddingFunction
 
-httpx = pytest.importorskip("httpx", reason="nomic not installed")
+httpx = pytest.importorskip("httpx", reason="httpx not installed")
 
 
 @pytest.mark.skipif(

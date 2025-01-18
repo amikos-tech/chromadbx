@@ -19,6 +19,8 @@ pip install chromadbx
     - [SpaCy](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#spacy) embeddings
     - [Together](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#together) embeddings.
     - [Nomic](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#nomic) embeddings.
+- [Reranking](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md) - rerank documents and query results using Cohere, OpenAI, or custom reranking functions.
+    - [Cohere](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md#cohere) - rerank documents and query results using Cohere.
 
 ## Usage
 
