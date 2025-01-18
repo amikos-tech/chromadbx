@@ -87,3 +87,4 @@ jobs:
           CF_GATEWAY_ENDPOINT: ${{ secrets.CF_GATEWAY_ENDPOINT }}
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
           NOMIC_API_KEY: ${{ secrets.NOMIC_API_KEY }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}

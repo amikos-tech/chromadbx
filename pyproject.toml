@@ -34,10 +34,12 @@ llama-embedder = "^0.0.7"
 mistralai = "^1.1.0"
 spacy = "^3.8.4"
 together = "^1.3.11"
+cohere = "^5.13.8"
 
 [tool.poetry.extras]
 ids = ["ulid-py", "nanoid"]
 embeddings = ["llama-embedder", "onnxruntime", "huggingface_hub", "mistralai", "spacy", "together", "vertexai"]
+reranking = ["cohere"]
 core = ["chromadb"]
 
 [build-system]

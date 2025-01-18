@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 
 from chromadbx.reranking import (
     Queries,
@@ -26,6 +26,19 @@ class CohereReranker(RerankingFunction[Rerankable, RankedResults]):
         max_retries: Optional[int] = 3,
         additional_headers: Optional[Dict[str, Any]] = None,
     ):
+        """
+        Initialize the CohereReranker.
+
+        Args:
+            api_key: The Cohere API key.
+            model_name: The Cohere model to use for reranking. Defaults to `rerank-v3.5`.
+            raw_scores: Whether to return the raw scores from the Cohere API. Defaults to `False`.
+            top_n: The number of results to return. Defaults to `None`.
+            max_tokens_per_document: The maximum number of tokens per document. Defaults to `4096`.
+            timeout: The timeout for the Cohere API request. Defaults to `60`.
+            max_retries: The maximum number of retries for the Cohere API request. Defaults to `3`.
+            additional_headers: Additional headers to include in the Cohere API request. Defaults to `None`.
+        """
         try:
             import cohere
             from cohere.core.request_options import RequestOptions
@@ -56,79 +69,70 @@ class CohereReranker(RerankingFunction[Rerankable, RankedResults]):
         return RerankerID("cohere")
 
     def _combine_reranked_results(
-        self, results: "cohere.v2.types.V2RerankResponse", rerankables: Rerankable  # type: ignore # noqa: F821
+        self, results_list: List["cohere.v2.types.V2RerankResponse"], rerankables: Rerankable  # type: ignore # noqa: F821
     ) -> RankedResults:
-        """
-                {
-          "results": [
-            {
-              "index": 3,
-              "relevance_score": 0.999071
-            },
-            {
-              "index": 4,
-              "relevance_score": 0.7867867
-            },
-            {
-              "index": 0,
-              "relevance_score": 0.32713068
-            }
-          ],
-          "id": "07734bd2-2473-4f07-94e1-0d9f0e6843cf",
-          "meta": {
-            "api_version": {
-              "version": "2",
-              "is_experimental": false
-            },
-            "billed_units": {
-              "search_units": 1
-            }
-          }
-        }
-        """
+        all_ordered_scores = []
 
-        if self._raw_scores:
-            ordered_scores = [
-                r.relevance_score
-                for r in sorted(results.results, key=lambda x: x.index)  # type: ignore
-            ]
-        else:  # by default we calculate the distance to make results comparable with Chroma distance
-            ordered_scores = [
-                1 - r.relevance_score
-                for r in sorted(results.results, key=lambda x: x.index)  # type: ignore
-            ]
+        for results in results_list:
+            if self._raw_scores:
+                ordered_scores = [
+                    r.relevance_score
+                    for r in sorted(results.results, key=lambda x: x.index)  # type: ignore
+                ]
+            else:  # by default we calculate the distance to make results comparable with Chroma distance
+                ordered_scores = [
+                    1 - r.relevance_score
+                    for r in sorted(results.results, key=lambda x: x.index)  # type: ignore
+                ]
+            all_ordered_scores.append(ordered_scores)
+
         if isinstance(rerankables, dict):
-            if len(rerankables["ids"]) != len(ordered_scores):
-                ordered_scores = ordered_scores + [None] * (
-                    len(rerankables["ids"]) - len(ordered_scores)
-                )
-            return [
-                RerankedQueryResult(
-                    ids=rerankables["ids"],
-                    embeddings=rerankables["embeddings"],
-                    documents=rerankables["documents"],
-                    uris=rerankables["uris"],
-                    data=rerankables["data"],
-                    metadatas=rerankables["metadatas"],
-                    distances=rerankables["distances"],
-                    included=rerankables["included"],
-                    ranked_distances={self.id(): ordered_scores},
-                )
+            combined_ordered_scores = [
+                score for sublist in all_ordered_scores for score in sublist
             ]
+            if len(rerankables["ids"]) != len(combined_ordered_scores):
+                combined_ordered_scores = combined_ordered_scores + [None] * (
+                    len(rerankables["ids"]) - len(combined_ordered_scores)
+                )
+            return RerankedQueryResult(
+                ids=rerankables["ids"],
+                embeddings=rerankables["embeddings"]
+                if "embeddings" in rerankables
+                else None,
+                documents=rerankables["documents"]
+                if "documents" in rerankables
+                else None,
+                uris=rerankables["uris"] if "uris" in rerankables else None,
+                data=rerankables["data"] if "data" in rerankables else None,
+                metadatas=rerankables["metadatas"]
+                if "metadatas" in rerankables
+                else None,
+                distances=rerankables["distances"]
+                if "distances" in rerankables
+                else None,
+                included=rerankables["included"] if "included" in rerankables else None,
+                ranked_distances={self.id(): combined_ordered_scores},
+            )
         elif isinstance(rerankables, list):
-            if len(rerankables) != len(ordered_scores):
-                ordered_scores = ordered_scores + [None] * (
-                    len(rerankables) - len(ordered_scores)
+            if len(results_list) > 1:
+                raise ValueError("Cannot rerank documents with multiple results")
+            combined_ordered_scores = [
+                score for sublist in all_ordered_scores for score in sublist
+            ]
+            if len(rerankables) != len(combined_ordered_scores):
+                combined_ordered_scores = combined_ordered_scores + [None] * (
+                    len(rerankables) - len(combined_ordered_scores)
                 )
             return RerankedDocuments(
                 documents=rerankables,
-                ranked_distances={self.id(): ordered_scores},
+                ranked_distances={self.id(): combined_ordered_scores},
             )
         else:
             raise ValueError("Invalid rerankables type")
 
     def __call__(self, queries: Queries, rerankables: Rerankable) -> RankedResults:
         query_documents_tuples = get_query_documents_tuples(queries, rerankables)
+        results = []
         for query, documents in query_documents_tuples:
             response = self._client.rerank(
                 model=self._model_name,
@@ -138,5 +142,5 @@ class CohereReranker(RerankingFunction[Rerankable, RankedResults]):
                 max_tokens_per_doc=self._max_tokens_per_document,
                 request_options=self._request_options,
             )
-            print(response)
-        return self._combine_reranked_results(response, rerankables)
+            results.append(response)
+        return self._combine_reranked_results(results, rerankables)

@@ -48,7 +48,7 @@ class RerankedQueryResult(TypedDict):
     metadatas: Optional[List[List[Metadata]]]
     distances: Optional[List[List[Distance]]]
     included: Include
-    ranked_distances: Dict[RerankerID, List[Distance]]
+    ranked_distances: Dict[RerankerID, List[Distances]]
 
 
 class RerankedDocuments(TypedDict):
@@ -56,7 +56,7 @@ class RerankedDocuments(TypedDict):
     ranked_distances: Dict[RerankerID, Distances]
 
 
-RankedResults = Union[RerankedDocuments, List[RerankedQueryResult]]
+RankedResults = Union[RerankedDocuments, RerankedQueryResult]
 
 D = TypeVar("D", bound=Rerankable, contravariant=True)
 T = TypeVar("T", bound=RankedResults, covariant=True)
