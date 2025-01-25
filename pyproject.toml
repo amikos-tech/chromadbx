@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "chromadbx"
 version = "0.1.0"
-description = "A collection of experimental Chroma extensions."
+description = "Collection of useful utilities to Chroma AI application database core package."
 authors = ["Trayan Azarov <trayan.azarov@amikos.tech>"]
 readme = "README.md"
 
@@ -39,7 +39,7 @@ cohere = "^5.13.8"
 [tool.poetry.extras]
 ids = ["ulid-py", "nanoid"]
 embeddings = ["llama-embedder", "onnxruntime", "huggingface_hub", "mistralai", "spacy", "together", "vertexai"]
-reranking = ["cohere"]
+reranking = ["cohere", "together"]
 core = ["chromadb"]
 
 [build-system]
