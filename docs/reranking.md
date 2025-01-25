@@ -23,14 +23,62 @@ print("Distances:", reranked_results["distances"][0])
 print("Reranked distances:", reranked_results["ranked_distances"][some_reranker.id()][0])
 ```
 
+Reranking results take the following two forms.
+
+**Reranked documents**
+
+This is intended for more simple use cases and also to be used as standalone feature.
+
+```python
+class RerankedDocuments(TypedDict):
+    documents: List[Documents]
+    ranked_distances: Dict[RerankerID, Distances]
+```
+
+**Reranked Chroma results**
+
+This type of reranking results are indended to be used together with Chroma and more specifically to be a drop-in replacement for existing Chroma `QueryResult` type.
+
+```python
+class RerankedQueryResult(TypedDict):
+    ids: List[IDs]
+    embeddings: Optional[
+        Union[
+            List[Embeddings],
+            List[PyEmbeddings],
+            List[np.typing.NDArray[Union[np.int32, np.float32]]],
+        ]
+    ]
+    documents: Optional[List[List[Document]]]
+    uris: Optional[List[List[URI]]]
+    data: Optional[List[Loadable]]
+    metadatas: Optional[List[List[Metadata]]]
+    distances: Optional[List[List[Distance]]]
+    included: Include
+    ranked_distances: Dict[RerankerID, List[Distances]]
+
+```
+
+**Common types**
+
+```python
+RerankerID = str # the ID of the reranker - this is used to identify the reranker in the reranked results
+Distance = float # the distance between the query and the document
+Distances = List[Distance] # a list of distances
+
+Rerankable = Union[Documents, QueryResult] # a type that can be reranked
+Queries = Union[str, List[str]] # a type that can be used as a query
+```
+
 > [!NOTE]
-> It is our intent that all officially supported reranking functions shall return distances instead of scores to be consistent with the core Chroma project. However, this is not a hard requirement and you should check the documentation for each reranking function you plan to use.
+> It is our intent that all supported reranking functions shall return distances instead of scores to be consistent with the core Chroma project. However, this is not a hard requirement and you should check the documentation for each reranking function you plan to use.
 
 The following reranking functions are supported:
 
 | Reranking Function | Official Docs |
 | ------------------ | ------------- |
 | [Cohere](#cohere) | [docs](https://docs.cohere.com/docs/rerank-2) |
+| [Together](#together) | [docs](https://docs.together.ai/docs/rerank-overview) |
 
 ## Cohere
 
@@ -57,7 +105,18 @@ cohere = CohereReranker(api_key=os.getenv("COHERE_API_KEY"))
 
 client = chromadb.Client()
 
-collection = client.get_collection("documents")
+collection = client.get_or_create_collection("capital_cities")
+
+collection.add(
+    ids=["usa", "france", "germany", "italy", "spain"],
+    documents=[
+        "The capital of the United States is Washington, D.C.",
+        "The capital of France is Paris.",
+        "The capital of Germany is Berlin.",
+        "The capital of Italy is Rome.",
+        "The capital of Spain is Madrid.",
+    ]
+)
 
 results = collection.query(
     query_texts=["What is the capital of the United States?"],
@@ -102,12 +161,25 @@ together = TogetherReranker(api_key=os.getenv("TOGETHER_API_KEY"))
 
 client = chromadb.Client()
 
-collection = client.get_collection("documents")
+collection = client.get_or_create_collection("capital_cities")
+
+collection.add(
+    ids=["usa", "france", "germany", "italy", "spain"],
+    documents=[
+        "The capital of the United States is Washington, D.C.",
+        "The capital of France is Paris.",
+        "The capital of Germany is Berlin.",
+        "The capital of Italy is Rome.",
+        "The capital of Spain is Madrid.",
+    ]
+)
 
 results = collection.query(
     query_texts=["What is the capital of the United States?"],
     n_results=10,
 )
+
+reranked_results = together(results)
 ```
 
 Available options:
