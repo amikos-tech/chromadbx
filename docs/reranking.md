@@ -77,3 +77,45 @@ Available options:
 - `timeout`: The timeout for the Cohere API request. Defaults to `60`.
 - `max_retries`: The maximum number of retries for the Cohere API request. Defaults to `3`.
 - `additional_headers`: Additional headers to include in the Cohere API request. Defaults to `None`.
+
+## Together
+
+Together reranking function offers a convinient wrapper around the Together API to rerank documents and query results. For more information on Together reranking, visit the [official docs](https://docs.together.ai/docs/rerank-overview) or [API docs](https://docs.together.ai/reference/rerank-1).
+
+You need to install the `together` package to use this reranking function.
+
+```bash
+pip install --upgrade together # or poetry add together
+```
+
+Before using the reranking function, you need to obtain [Together API](https://api.together.xyz/settings/api-keys) key and set the `TOGETHER_API_KEY` environment variable.
+
+> [!TIP]
+>  By default, the reranking function will return distances. If you need to get the raw scores, set the `raw_scores` parameter to `True`.
+
+```python
+import os
+import chromadb
+from chromadbx.reranking import TogetherReranker
+
+together = TogetherReranker(api_key=os.getenv("TOGETHER_API_KEY"))
+
+client = chromadb.Client()
+
+collection = client.get_collection("documents")
+
+results = collection.query(
+    query_texts=["What is the capital of the United States?"],
+    n_results=10,
+)
+```
+
+Available options:
+
+- `api_key`: The Together API key.
+- `model_name`: The Together model to use for reranking. Defaults to `Salesforce/Llama-Rank-V1`.
+- `raw_scores`: Whether to return the raw scores from the Together API. Defaults to `False`.
+- `top_n`: The number of results to return. Defaults to `None`.
+- `timeout`: The timeout for the Together API request. Defaults to `60`.
+- `max_retries`: The maximum number of retries for the Together API request. Defaults to `3`.
+- `additional_headers`: Additional headers to include in the Together API request. Defaults to `None`.

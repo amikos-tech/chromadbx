@@ -1,11 +1,10 @@
-# ChromaX: An experimental utilities package for Chroma AI application database
+# ChromaX: Collection of useful utilities to Chroma AI application database core package.
 
 ## Installation
 
 ```bash
 pip install chromadbx
 ```
-
 ## Features
 
 - [Query Builder](https://github.com/amikos-tech/chromadbx#queries) - build queries using a builder pattern
@@ -19,8 +18,9 @@ pip install chromadbx
     - [SpaCy](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#spacy) embeddings
     - [Together](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#together) embeddings.
     - [Nomic](https://github.com/amikos-tech/chromadbx/blob/main/docs/embeddings.md#nomic) embeddings.
-- [Reranking](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md) - rerank documents and query results using Cohere, OpenAI, or custom reranking functions.
+- ✨ [Reranking](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md) - rerank documents and query results using Cohere, OpenAI, or custom reranking functions.
     - [Cohere](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md#cohere) - rerank documents and query results using Cohere.
+    - [Together](https://github.com/amikos-tech/chromadbx/blob/main/docs/reranking.md#together) - rerank documents and query results using Together.
 
 ## Usage
 
